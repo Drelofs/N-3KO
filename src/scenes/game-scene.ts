@@ -60,7 +60,7 @@ export class GameScene extends Phaser.Scene {
         this.physics.world.bounds.width = 1600
         this.physics.world.bounds.height = 600
 
-        this.cameras.main.setSize(800,600) //canvas
+        this.cameras.main.setSize(1440,900) //canvas
         this.cameras.main.setBounds(0,0,1600,600) //game
         this.cameras.main.startFollow(this.player)
 

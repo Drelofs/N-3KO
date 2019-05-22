@@ -6,8 +6,8 @@ import { EndScene } from "./scenes/end-scene"
 import { NextScene } from "./scenes/next-scene"
 
 const config: GameConfig = {
-    width: 800,
-    height: 600,
+    width: 1440,
+    height: 900,
     parent: "game",
     resolution: window.devicePixelRatio,
     scene: [BootScene, StartScene, GameScene, EndScene, NextScene],
