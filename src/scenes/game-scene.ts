@@ -22,7 +22,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     create(): void {
-        this.add.image(0, 0, 'sky').setOrigin(0, 0)      
+        this.add.image(0, 0, 'WASTELAND1').setOrigin(0, 0)      
     
         // 11 STARS
         this.stars = this.physics.add.group({
@@ -41,13 +41,14 @@ export class GameScene extends Phaser.Scene {
 
         this.platforms = this.add.group({ runChildUpdate: true })
         this.platforms.addMultiple([
-            new Platform(this, 800, 574, "ground"),
+            new Platform(this, 800, 870, "ground"),
+            new Platform(this, 2400, 870, "ground"),
             new Platform(this, 550, 250, "ice"),
             new Platform(this, 200, 350, "platform"),
-            new MovingPlatform(this, 600, 400, "platform")
+            new MovingPlatform(this, 900, 400, "platform")
         ], true)
 
-        this.scoreField = this.add.text(200, 20,  + this.collectedStars+ ' STARS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#2ac9be', 2)
+        this.scoreField = this.add.text(200, 20,  + this.collectedStars+ ' SCRAPS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#2ac9be', 2)
         
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.stars, this.platforms)
@@ -57,11 +58,11 @@ export class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
         this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
 
-        this.physics.world.bounds.width = 1600
-        this.physics.world.bounds.height = 600
+        this.physics.world.bounds.width = 1440 * 2
+        this.physics.world.bounds.height = 900
 
         this.cameras.main.setSize(1440,900) //canvas
-        this.cameras.main.setBounds(0,0,1600,600) //game
+        this.cameras.main.setBounds(0,0,1440 * 2,900) //game
         this.cameras.main.startFollow(this.player)
 
     }
@@ -76,7 +77,7 @@ export class GameScene extends Phaser.Scene {
         this.collectedStars++
 
         // TO DO check if we have all the stars, then go to the end scene
-        this.scoreField.text = this.collectedStars+ ' STARS COLLECTED'
+        this.scoreField.text = this.collectedStars+ ' SCRAPS COLLECTED'
         
         if(this.collectedStars == 12){
             this.scene.start('NextScene')

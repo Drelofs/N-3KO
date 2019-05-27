@@ -4,7 +4,7 @@ export class Bomb extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, "bomb")
 
         this.scene.physics.add.existing(this)
-
+        
         this.setBounce(0.6)
         this.setCollideWorldBounds(true)
 
