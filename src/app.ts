@@ -27,6 +27,7 @@ const config: GameConfig = {
 export class Game extends Phaser.Game {
     constructor(config: GameConfig) {
         super(config)
+        console.log("Gebruik dit niet!!")
     }
 }
 
