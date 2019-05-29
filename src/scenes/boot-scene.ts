@@ -35,6 +35,28 @@ export class BootScene extends Phaser.Scene {
         this.load.image('NEKO_IDLE1', require('../assets/N-3KO_IDLE1.png'))
         this.load.image('NEKO_IDLE2', require('../assets/N-3KO_IDLE2.png'))
 
+        this.load.image('NEKO_WALK1', require('../assets/N-3KO_WALK1.png'))
+        this.load.image('NEKO_WALK2', require('../assets/N-3KO_WALK2.png'))
+        this.load.image('NEKO_WALK3', require('../assets/N-3KO_WALK3.png'))
+        this.load.image('NEKO_WALK4', require('../assets/N-3KO_WALK4.png'))
+
+        this.load.image('NEKO_RUN1', require('../assets/N-3KO_RUN1.png'))
+        this.load.image('NEKO_RUN2', require('../assets/N-3KO_RUN2.png'))
+        this.load.image('NEKO_RUN3', require('../assets/N-3KO_RUN3.png'))
+        this.load.image('NEKO_RUN4', require('../assets/N-3KO_RUN4.png'))
+        this.load.image('NEKO_RUN5', require('../assets/N-3KO_RUN5.png'))
+        this.load.image('NEKO_RUN6', require('../assets/N-3KO_RUN6.png'))
+
+        this.load.image('NEKO_JUMP1', require('../assets/N-3KO_JUMP1.png'))
+        this.load.image('NEKO_JUMP2', require('../assets/N-3KO_JUMP2.png'))
+        this.load.image('NEKO_JUMP3', require('../assets/N-3KO_JUMP3.png'))
+        this.load.image('NEKO_JUMP4', require('../assets/N-3KO_JUMP4.png'))
+        this.load.image('NEKO_JUMP5', require('../assets/N-3KO_JUMP5.png'))
+        this.load.image('NEKO_JUMP6', require('../assets/N-3KO_JUMP6.png'))
+        this.load.image('NEKO_JUMP7', require('../assets/N-3KO_JUMP7.png'))
+        this.load.image('NEKO_JUMP8', require('../assets/N-3KO_JUMP8.png'))
+        
+
         this.load.on('complete', () => {
             console.log("everything is loaded")
             
