@@ -24,7 +24,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     create(): void {
-        this.bgtile = this.add.tileSprite(0, 0, 1800, 600, 'WASTELAND1')
+        this.bgtile = this.add.tileSprite(0, 0, 1440, 900, 'WASTELAND1')
         this.bgtile.setOrigin(0,0)
 
        
@@ -47,9 +47,9 @@ export class GameScene extends Phaser.Scene {
         this.platforms.addMultiple([
             new Platform(this, 800, 870, "platformOne"),
             new Platform(this, 2400, 870, "platformOne"),
-            new Platform(this, 550, 250, "ice"),
-            new Platform(this, 200, 350, "platform"),
-            new MovingPlatform(this, 900, 400, "platform")
+                // new Platform(this, 550, 250, "ice"),
+                // new Platform(this, 200, 350, "platform"),
+                // new MovingPlatform(this, 900, 400, "platform")
         ], true)
 
         this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
@@ -90,7 +90,7 @@ export class GameScene extends Phaser.Scene {
 
     update(){
         this.player.update()
-        this.bgtile.tilePositionX += 1
+        this.bgtile.tilePositionX += -0.1
     }
 
 }

@@ -11,10 +11,10 @@ export class StartScene extends Phaser.Scene {
     }
 
     create(): void {
-        this.add.image(0, 0, 'sky').setOrigin(0, 0)
+        this.add.image(0, 0, 'WASTELAND1').setOrigin(0, 0)
 
         // add another image here
-        this.add.image(100, 500, 'neko').setOrigin(0, 0)
+        this.add.image(500, 500, 'neko_IDLE1').setOrigin(0, 0)
 
         // add text here
         this.add.text(400, 300, 'N-3KO', { fontFamily: 'Arial Black', fontSize: 70, color: '#2ac9be' }).setOrigin(0.5).setStroke('#7df2ea', 16)

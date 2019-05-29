@@ -3,8 +3,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Input.Keyboard.CursorKeys
 
     constructor(scene) {
-        super(scene, 0, 500, "neko")
-
+        super(scene, 0, 500, "neko_IDLE1")
+        
         this.cursors = this.scene.input.keyboard.createCursorKeys()
         
         this.scene.add.existing(this)
@@ -15,6 +15,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.setDragX(800)
     }
 
+    
     public update(): void {
         
         if (this.cursors.left.isDown) {

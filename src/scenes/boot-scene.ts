@@ -21,8 +21,13 @@ export class BootScene extends Phaser.Scene {
         this.load.image('start', require('../assets/videogame.png'))
         this.load.image('cat', require('../assets/kittycat.png'))
         this.load.image('city', require('../assets/background_2.png'))
-        this.load.image('neko', require('../assets/N-3KO_IDLE1.png'))
         this.load.image('platformOne', require('../assets/platform_one.jpg'))
+
+        // this.load.path = 'assets/animations/';
+
+        // N-3KO IDLE
+        this.load.image('neko_IDLE1', require('../assets/N-3KO_IDLE1.png'))
+        this.load.image('neko_IDLE2', require('../assets/N-3KO_IDLE2.png'))
 
         this.load.on('complete', () => {
             console.log("everything is loaded")
