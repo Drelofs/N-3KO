@@ -1,8 +1,10 @@
 import { Player } from "../objects/player"
-import { Bomb } from "../objects/bomb"
+import { Enemy, enemy } from "../objects/bomb"
 import { Platform } from "../objects/platform"
 import { MovingPlatform } from "../objects/movingplatform"
 import { isAbsolute } from "path";
+
+
 
 export class GameScene extends Phaser.Scene {
 
@@ -11,7 +13,7 @@ export class GameScene extends Phaser.Scene {
     private scraps: Phaser.Physics.Arcade.Group
     private collectedScraps = 0
     private scoreField 
-    private bombs: Phaser.GameObjects.Group
+    private enemies: Phaser.GameObjects.Group
     private bgtile: Phaser.GameObjects.TileSprite
 
     constructor() {
@@ -35,12 +37,12 @@ export class GameScene extends Phaser.Scene {
             setXY: { x: 12, y: 30, stepX: 70 },
         })
 
-        this.bombs = this.add.group()
+        this.enemies = this.add.group()
         for (let i =0; i <1; i++){
-            this.bombs.add(new Bomb(this, 350, 20), true)
+            this.enemies.add(new enemy(this, 700, 755), true)
         }
 
-        // TODO add player
+        // TODO add player and enemy
         
         this.player = new Player(this)
 
@@ -58,10 +60,10 @@ export class GameScene extends Phaser.Scene {
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platforms)
         this.physics.add.collider(this.player, this.platforms)
-        this.physics.add.collider(this.bombs, this.platforms)
+        this.physics.add.collider(this.enemies, this.platforms)
         
         this.physics.add.overlap(this.player, this.scraps, this.collectScraps, null, this)
-        this.physics.add.overlap(this.player, this.bombs, this.hitBomb, null, this)
+        this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this)
 
         this.physics.world.bounds.width = 1440 * 2
         this.physics.world.bounds.height = 900
@@ -72,7 +74,7 @@ export class GameScene extends Phaser.Scene {
 
     }
 
-    private hitBomb(player: Player, bomb) {
+    private hitEnemy(player: Player, enemy) {
         this.scene.start("EndScene")
     }
 

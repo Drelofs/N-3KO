@@ -1,14 +1,13 @@
-export class Bomb extends Phaser.Physics.Arcade.Sprite {
+export class enemy extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene, x,y) {
-        super(scene, x, y, "bomb")
+        super(scene, x, y, "enemy")
 
         this.scene.physics.add.existing(this)
         
-        this.setBounce(0.6)
-        this.setCollideWorldBounds(true)
+        this.setBounce(0)
 
-        this.setVelocity(Phaser.Math.Between(-200, 200), 30);
-        this.setAngularVelocity(30);
+        this.setVelocity(-100);
+        this.setAngularVelocity(0);
     }
 }

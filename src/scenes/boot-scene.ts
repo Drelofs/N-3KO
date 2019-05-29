@@ -23,7 +23,12 @@ export class BootScene extends Phaser.Scene {
         this.load.image('cat', require('../assets/kittycat.png'))
         this.load.image('level_ice', require('../assets/level_ice.png'))
         this.load.image('platformOne', require('../assets/platform_one.jpg'))
+
+        // RoboAnimals
         this.load.image('raElephant', require('../assets/RoboAnimals/raElephant.png'))
+
+        // Enemies
+        this.load.image('enemy', require('../assets/ghoul.png'))
         
         
         // N-3KO
