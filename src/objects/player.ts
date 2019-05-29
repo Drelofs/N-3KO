@@ -18,10 +18,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     public update(): void {
         
         if (this.cursors.left.isDown) {
-            this.setVelocityX(-250)
+            this.setVelocityX(-300)
             this.flipX = true
         } else if (this.cursors.right.isDown) {
-            this.setVelocityX(250)
+            this.setVelocityX(300)
             this.flipX = false
         } 
         
@@ -29,7 +29,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         // jump when the body is touching the floor
         let grounded = this.body.touching.down 
         if (this.cursors.up.isDown && grounded) {
-            this.setVelocityY(-800)
+            this.setVelocityY(-500)
         }
         
     }
