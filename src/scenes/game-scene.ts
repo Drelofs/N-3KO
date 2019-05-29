@@ -12,6 +12,7 @@ export class GameScene extends Phaser.Scene {
     private collectedScraps = 0
     private scoreField 
     private bombs: Phaser.GameObjects.Group
+    private bgtile: Phaser.GameObjects.TileSprite
 
     constructor() {
         super({ key: "GameScene" })
@@ -23,9 +24,10 @@ export class GameScene extends Phaser.Scene {
     }
 
     create(): void {
-        this.add.image(0,0,'WASTELAND1').setOrigin(0, 0)
-        
-    
+        this.bgtile = this.add.tileSprite(0, 0, 1800, 600, 'WASTELAND1')
+        this.bgtile.setOrigin(0,0)
+
+       
         // 11 SCRAPS
         this.scraps = this.physics.add.group({
             key: 'scrap',
@@ -88,6 +90,7 @@ export class GameScene extends Phaser.Scene {
 
     update(){
         this.player.update()
+        this.bgtile.tilePositionX += 1
     }
 
 }
