@@ -24,7 +24,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     create(): void {
-        this.bgtile = this.add.tileSprite(0, 0, 1800, 600, 'WASTELAND1')
+        this.bgtile = this.add.tileSprite(0, 0, 1800, 900, 'WASTELAND1')
         this.bgtile.setOrigin(0,0)
 
        
@@ -83,8 +83,9 @@ export class GameScene extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
         
-        if(this.collectedScraps == 12){
-            this.scene.start('NextScene')
+        if(this.collectedScraps == 1){
+            this.scene.start('GameScene2')
+           
         }
     }
 
