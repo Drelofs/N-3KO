@@ -2,6 +2,7 @@ import { Player } from "../objects/player"
 import { Bomb } from "../objects/bomb"
 import { Platform } from "../objects/platform"
 import { MovingPlatform } from "../objects/movingplatform"
+import { isAbsolute } from "path";
 
 export class GameScene extends Phaser.Scene {
 
@@ -22,7 +23,8 @@ export class GameScene extends Phaser.Scene {
     }
 
     create(): void {
-        this.add.image(0, 0, 'WASTELAND1').setOrigin(0, 0)      
+        this.add.image(0,0,'WASTELAND1').setOrigin(0, 0)
+        
     
         // 11 SCRAPS
         this.scraps = this.physics.add.group({
@@ -41,14 +43,14 @@ export class GameScene extends Phaser.Scene {
 
         this.platforms = this.add.group({ runChildUpdate: true })
         this.platforms.addMultiple([
-            new Platform(this, 800, 870, "ground"),
-            new Platform(this, 2400, 870, "ground"),
+            new Platform(this, 800, 870, "platformOne"),
+            new Platform(this, 2400, 870, "platformOne"),
             new Platform(this, 550, 250, "ice"),
             new Platform(this, 200, 350, "platform"),
             new MovingPlatform(this, 900, 400, "platform")
         ], true)
 
-        this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#2ac9be', 2)
+        this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
         
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platforms)
@@ -79,7 +81,7 @@ export class GameScene extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
         
-        if(this.collectedScraps == 1){
+        if(this.collectedScraps == 12){
             this.scene.start('NextScene')
         }
     }
