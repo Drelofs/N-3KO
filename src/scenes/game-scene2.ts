@@ -68,7 +68,7 @@ export class GameScene2 extends Phaser.Scene {
         
         if(this.collectedScraps == 1){
 
-            this.add.image(300, 300, 'raElephant').setOrigin(0, 0)
+            this.add.image(300, 300, 'raElephant').setOrigin(0, 0);
             this.roboAnimal.collected = true;
             this.add.text(300, 350, 'You earned a RoboAnimal!'
             // this.scene.start('NextScene')
