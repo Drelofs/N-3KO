@@ -41,15 +41,16 @@ export class GameScene extends Phaser.Scene {
         }
 
         // TODO add player
+        
         this.player = new Player(this)
 
         this.platforms = this.add.group({ runChildUpdate: true })
         this.platforms.addMultiple([
             new Platform(this, 800, 870, "platformOne"),
             new Platform(this, 2400, 870, "platformOne"),
-            new Platform(this, 550, 250, "ice"),
-            new Platform(this, 200, 350, "platform"),
-            new MovingPlatform(this, 900, 400, "platform")
+            // new Platform(this, 550, 250, "ice"),
+            // new Platform(this, 200, 350, "platform"),
+            // new MovingPlatform(this, 900, 400, "platform")
         ], true)
 
         this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
@@ -83,7 +84,7 @@ export class GameScene extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
         
-        if(this.collectedScraps == 1){
+        if(this.collectedScraps == 12){
             this.scene.start('GameScene2')
            
         }

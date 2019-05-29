@@ -13,13 +13,13 @@ export class EndScene extends Phaser.Scene {
     create(): void {
         // change this to a nice game over image
 
-        this.add.image(0, 0, 'sky').setOrigin(0, 0)
+        this.add.image(0, 0, 'WASTELAND1').setOrigin(0, 0)
 
         // add text here
 
-        this.add.text(400, 300, 'GAME OVER, MAN!', { fontFamily: 'Arial Black', fontSize: 70, color: '#2ac9be' }).setOrigin(0.5).setStroke('#7df2ea', 16)
+        this.add.text(600, 300, 'GAME OVER, MAN!', { fontFamily: 'Arial Black', fontSize: 70, color: '#2ac9be' }).setOrigin(0.5).setStroke('#7df2ea', 16)
 
-        let btn1 = this.add.image(400,400, 'start')
+        let btn1 = this.add.image(600,400, 'start')
         btn1.setInteractive()
         btn1.on('pointerdown', (pointer) => {
             this.scene.start('GameScene')
