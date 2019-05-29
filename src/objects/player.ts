@@ -14,8 +14,51 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.setBounce(0.1)
         this.setDragX(800)
 
-        // N-3KO IDLE
+        this.createAnimations()
+        this.play("IDLE", true)
 
+    }
+
+
+    public update(): void {
+
+     //WALK
+        if (this.cursors.left.isDown) {
+            this.setVelocityX(-300)
+            this.flipX = true
+            if(this.cursors.space.isDown) {
+                this.setVelocityX(-400)
+                this.play("RUN", true)
+            } else {
+                this.play("WALK", true)
+            }
+        } else if (this.cursors.right.isDown) {
+            this.setVelocityX(300)
+            this.flipX = false
+            if(this.cursors.space.isDown) {
+                this.setVelocityX(400)
+                this.play("RUN", true)
+            } else {
+                this.play("WALK", true)
+            }
+         } else {
+           this.play("IDLE", true)
+        }
+
+        
+        // jump when the body is touching the floor
+        let grounded = this.body.touching.down 
+        if (this.cursors.up.isDown && grounded) {
+            this.setVelocityY(-500)
+            this.play("JUMP", true)
+        }
+        // this.play("WALK", true)
+        
+    }
+
+    private createAnimations(){
+
+        // N-3KO IDLE
         this.scene.anims.create({
             key: 'IDLE',
             frames: [
@@ -26,39 +69,50 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             repeat: -1
         });
 
-        //JUMP
-
+        //WALK
         this.scene.anims.create({
-            key: 'JUMP',
+            key: 'WALK',
             frames: [
-                { key: 'NEKO_IDLE1', frame :""},
-                { key: 'NEKO_IDLE2', frame :"", duration: 50 }
+                { key: 'NEKO_WALK1', frame :""},
+                { key: 'NEKO_WALK2', frame :""},
+                { key: 'NEKO_WALK3', frame :""},
+                { key: 'NEKO_WALK4', frame :"", duration: 50 }
             ],
             frameRate: 8,
             repeat: -1
         });
 
-        this.play("IDLE")
-    }
+        //RUN
+        this.scene.anims.create({
+            key: 'RUN',
+            frames: [
+                { key: 'NEKO_RUN1', frame :""},
+                { key: 'NEKO_RUN2', frame :""},
+                { key: 'NEKO_RUN3', frame :""},
+                { key: 'NEKO_RUN4', frame :""},
+                { key: 'NEKO_RUN5', frame :""},
+                { key: 'NEKO_RUN6', frame :"", duration: 50 }
+            ],
+            frameRate: 8,
+            repeat: -1
+        });
 
-    public update(): void {
-        
-        if (this.cursors.left.isDown) {
-            this.setVelocityX(-300)
-            this.flipX = true
-        } else if (this.cursors.right.isDown) {
-            this.setVelocityX(300)
-            this.flipX = false
-        } 
-        
+        //JUMP
+        this.scene.anims.create({
+            key: 'JUMP',
+            frames: [
+                { key: 'NEKO_JUMP1', frame :""},
+                { key: 'NEKO_JUMP2', frame :""},
+                { key: 'NEKO_JUMP3', frame :""},
+                { key: 'NEKO_JUMP4', frame :""},
+                { key: 'NEKO_JUMP5', frame :""},
+                { key: 'NEKO_JUMP6', frame :""},
+                { key: 'NEKO_JUMP7', frame :""},
+                { key: 'NEKO_JUMP8', frame :"", duration: 50 }
+            ],
+            frameRate: 8,
+            repeat: -1
+        });
 
-        // jump when the body is touching the floor
-        let grounded = this.body.touching.down 
-        if (this.cursors.up.isDown && grounded) {
-            this.setVelocityY(-500)
-
-            this.play("JUMP")
-        }
-        
     }
 }
