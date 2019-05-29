@@ -6,8 +6,8 @@ export class NextScene extends Phaser.Scene {
 
     private player : Player
     private platforms: Phaser.GameObjects.Group
-    private stars: Phaser.Physics.Arcade.Group
-    private collectedStars = 0
+    private scraps: Phaser.Physics.Arcade.Group
+    private collectedScraps = 0
     private scoreField 
 
     constructor() {
@@ -22,8 +22,8 @@ export class NextScene extends Phaser.Scene {
         this.add.image(0, 0, 'city').setOrigin(0, 0)      
     
         // 11 STARS
-        this.stars = this.physics.add.group({
-            key: 'star',
+        this.scraps = this.physics.add.group({
+            key: 'scrap',
             repeat: 11,
             setXY: { x: 12, y: 30, stepX: 70 },
         })
@@ -40,24 +40,24 @@ export class NextScene extends Phaser.Scene {
             new MovingPlatform(this, 600, 400, "platform")
         ], true)
 
-        this.scoreField = this.add.text(200, 20,  + this.collectedStars+ ' STARS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#2ac9be', 2)
+        this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' STARS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#2ac9be', 2)
         
         // define collisions for bouncing, and overlaps for pickups
-        this.physics.add.collider(this.stars, this.platforms)
+        this.physics.add.collider(this.scraps, this.platforms)
         this.physics.add.collider(this.player, this.platforms)
         
-        this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this)
+        this.physics.add.overlap(this.player, this.scraps, this.collectScraps, null, this)
     }
 
-    private collectStar(player : Player , star) : void {
-        this.stars.remove(star, true, true)
+    private collectScraps(player : Player , scrap) : void {
+        this.scraps.remove(scrap, true, true)
         this.registry.values.score++
-        this.collectedStars++
+        this.collectedScraps++
 
-        // TO DO check if we have all the stars, then go to the end scene
-        this.scoreField.text = this.collectedStars+ ' STARS COLLECTED'
+        // TO DO check if we have all the scraps, then go to the end scene
+        this.scoreField.text = this.collectedScraps+ ' STARS COLLECTED'
         
-        if(this.collectedStars == 12){
+        if(this.collectedScraps == 12){
             this.scene.start('NextScene')
         }
     }
