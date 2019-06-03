@@ -3,14 +3,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Input.Keyboard.CursorKeys
 
     constructor(scene) {
-        super(scene, 0, 500, "NEKO_IDLE1")
+        super(scene, 200, 500, "NEKO_IDLE1")
 
         this.cursors = this.scene.input.keyboard.createCursorKeys()
         
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
 
-        this.setCollideWorldBounds(true)
+        this.setCollideWorldBounds(false)
         this.setBounce(0.1)
         this.setDragX(800)
 
@@ -21,6 +21,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
 
     public update(): void {
+        console.log(this.y)
+
+        if(this.y > 1000) {
+            console.log("ik ben buiten beeld jongens!")
+            this.scene.scene.start("EndScene")
+        }
 
      //WALK
         if (this.cursors.left.isDown) {

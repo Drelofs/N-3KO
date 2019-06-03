@@ -18,11 +18,11 @@ export class BootScene extends Phaser.Scene {
         this.load.image('bmo', require('../assets/bmo.png'))
         this.load.image('ice', require('../assets/platform_ice.png'))
         this.load.image('platform', require('../assets/platform_grass.png'))
-        this.load.image('ground', require('../assets/platform_ground.png'))
+        // this.load.image('ground', require('../assets/platform_ground.png'))
         this.load.image('start', require('../assets/videogame.png'))
         this.load.image('cat', require('../assets/kittycat.png'))
         this.load.image('level_ice', require('../assets/level_ice.png'))
-        this.load.image('platformOne', require('../assets/platform_one.jpg'))
+        this.load.image('ground', require('../assets/ground.jpg'))
 
         // RoboAnimals
         this.load.image('raElephant', require('../assets/RoboAnimals/raElephant.png'))
@@ -31,7 +31,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image('enemy', require('../assets/ghoul.png'))
         
         
-        // N-3KO
+        // N-3KO Sprites
         this.load.image('NEKO_IDLE1', require('../assets/N-3KO_IDLE1.png'))
         this.load.image('NEKO_IDLE2', require('../assets/N-3KO_IDLE2.png'))
 
