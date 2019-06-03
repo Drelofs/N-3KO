@@ -6,6 +6,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene, 200, 500, "NEKO_IDLE1")
 
         this.cursors = this.scene.input.keyboard.createCursorKeys()
+
+        create() {
+            this.input.gamepad.on('down', function (pad, button, index) {
+               console.log("gamepad connected!")
+            }
         
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)

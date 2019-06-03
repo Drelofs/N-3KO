@@ -12,7 +12,8 @@ const config: GameConfig = {
     resolution: window.devicePixelRatio,
     scene: [BootScene, StartScene, GameScene, EndScene, GameScene2],
     input: {
-        keyboard: true
+        keyboard: true,
+        gamepad: true
     },
     physics: {
         default: "arcade",
