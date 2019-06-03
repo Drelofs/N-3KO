@@ -42,10 +42,10 @@ export class GameScene2 extends Phaser.Scene {
         this.platforms = this.add.group({ runChildUpdate: true })
         this.platforms.addMultiple([
             new Platform(this, 800, 870, "ground"),
-            new Platform(this, 200, 150, "ice"),
-            new MovingPlatform(this, 300, 300, "platform"),
-            new Platform(this, 500, 200, "platform"),
-            new MovingPlatform(this, 600, 400, "platform")
+            // new Platform(this, 200, 150, "ice"),
+            // new MovingPlatform(this, 300, 300, "platform"),
+            // new Platform(this, 500, 200, "platform"),
+            // new MovingPlatform(this, 600, 400, "platform")
         ], true)
 
         this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED',
@@ -68,9 +68,9 @@ export class GameScene2 extends Phaser.Scene {
         
         if(this.collectedScraps == 1){
 
-            this.add.image(300, 300, 'raElephant').setOrigin(0, 0);
+            this.add.image(900, 0, 'raElephant').setOrigin(0, 0);
             this.roboAnimal.collected = true;
-            this.add.text(300, 350, 'You earned a RoboAnimal!'
+            this.add.text(870, 200, 'You earned a RoboAnimal!'
             // this.scene.start('NextScene')
         }
     }

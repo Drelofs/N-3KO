@@ -16,6 +16,9 @@ export class GameScene extends Phaser.Scene {
     private enemies: Phaser.GameObjects.Group
     private bgtile: Phaser.GameObjects.TileSprite
 
+    private lives = 9
+    private livesField
+
     constructor() {
         super({ key: "GameScene" })
     }
@@ -56,7 +59,8 @@ export class GameScene extends Phaser.Scene {
         ], true)
 
         this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
-        
+        this.livesField = this.add.text(900, 300,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platforms)
         this.physics.add.collider(this.player, this.platforms)
@@ -75,7 +79,14 @@ export class GameScene extends Phaser.Scene {
     }
 
     private hitEnemy(player: Player, enemy) {
-        this.scene.start("EndScene")
+        
+        this.registry.values.lives--
+        this.lives--
+        this.livesField.text = this.lives+ ' Lives Left'
+
+        if (this.lives === 0) {
+            this.scene.start("EndScene")
+        }
     }
 
     private collectScraps(player : Player , scraps) : void {
