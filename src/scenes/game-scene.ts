@@ -1,5 +1,5 @@
 import { Player } from "../objects/player"
-import { Enemy, enemy } from "../objects/bomb"
+import { enemy } from "../objects/bomb"
 import { Platform } from "../objects/platform"
 import { MovingPlatform } from "../objects/movingplatform"
 import { isAbsolute } from "path";
@@ -36,7 +36,7 @@ export class GameScene extends Phaser.Scene {
         // 11 SCRAPS
         this.scraps = this.physics.add.group({
             key: 'scrap',
-            repeat: 11,
+            repeat: 20,
             setXY: { x: 12, y: 30, stepX: 70 },
         })
 
@@ -51,10 +51,9 @@ export class GameScene extends Phaser.Scene {
 
         this.platforms = this.add.group({ runChildUpdate: true })
         this.platforms.addMultiple([
-            new Platform(this, 800, 870, "platformOne"),
-            new Platform(this, 2400, 870, "platformOne"),
-            // new Platform(this, 550, 250, "ice"),
-            // new Platform(this, 200, 350, "platform"),
+            // new Platform(this, 800, 870, "ground"),
+            new Platform(this, 800, 870, "platform"),
+            new Platform(this, 200, 700, "platform"),
             // new MovingPlatform(this, 900, 400, "platform")
         ], true)
 
@@ -85,9 +84,11 @@ export class GameScene extends Phaser.Scene {
         this.livesField.text = this.lives+ ' Lives Left'
 
         if (this.lives === 0) {
+            this.collectedScraps = 0;
             this.scene.start("EndScene")
         }
     }
+
 
     private collectScraps(player : Player , scraps) : void {
         this.scraps.remove(scraps, true, true)
@@ -97,7 +98,7 @@ export class GameScene extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
         
-        if(this.collectedScraps == 12){
+        if(this.collectedScraps == 21){
             this.scene.start('GameScene2')
            
         }

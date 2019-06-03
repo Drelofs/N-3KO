@@ -1,3 +1,5 @@
+import { Game } from "phaser";
+
 export class BootScene extends Phaser.Scene {
 
     private graphics: Phaser.GameObjects.Graphics
@@ -9,6 +11,12 @@ export class BootScene extends Phaser.Scene {
     init(){
     }
 
+    private startGame(){
+        console.log("Game begins")
+        console.log(this)
+        this.scene.start("StartScene")
+    }
+
     preload(): void {
         
         this.load.image('sky', require('../assets/background.png'))
@@ -18,11 +26,11 @@ export class BootScene extends Phaser.Scene {
         this.load.image('bmo', require('../assets/bmo.png'))
         this.load.image('ice', require('../assets/platform_ice.png'))
         this.load.image('platform', require('../assets/platform_grass.png'))
-        this.load.image('ground', require('../assets/platform_ground.png'))
+        // this.load.image('ground', require('../assets/platform_ground.png'))
         this.load.image('start', require('../assets/videogame.png'))
         this.load.image('cat', require('../assets/kittycat.png'))
         this.load.image('level_ice', require('../assets/level_ice.png'))
-        this.load.image('platformOne', require('../assets/platform_one.jpg'))
+        this.load.image('ground', require('../assets/ground.jpg'))
 
         // RoboAnimals
         this.load.image('raElephant', require('../assets/RoboAnimals/raElephant.png'))
@@ -31,15 +39,19 @@ export class BootScene extends Phaser.Scene {
         this.load.image('enemy', require('../assets/ghoul.png'))
         
         
-        // N-3KO
+        // N-3KO Sprites
+
+        //Idle sprites
         this.load.image('NEKO_IDLE1', require('../assets/N-3KO_IDLE1.png'))
         this.load.image('NEKO_IDLE2', require('../assets/N-3KO_IDLE2.png'))
 
+        //Walking sprites
         this.load.image('NEKO_WALK1', require('../assets/N-3KO_WALK1.png'))
         this.load.image('NEKO_WALK2', require('../assets/N-3KO_WALK2.png'))
         this.load.image('NEKO_WALK3', require('../assets/N-3KO_WALK3.png'))
         this.load.image('NEKO_WALK4', require('../assets/N-3KO_WALK4.png'))
 
+        //Running sprites
         this.load.image('NEKO_RUN1', require('../assets/N-3KO_RUN1.png'))
         this.load.image('NEKO_RUN2', require('../assets/N-3KO_RUN2.png'))
         this.load.image('NEKO_RUN3', require('../assets/N-3KO_RUN3.png'))
@@ -47,6 +59,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image('NEKO_RUN5', require('../assets/N-3KO_RUN5.png'))
         this.load.image('NEKO_RUN6', require('../assets/N-3KO_RUN6.png'))
 
+        //Jumping sprites
         this.load.image('NEKO_JUMP1', require('../assets/N-3KO_JUMP1.png'))
         this.load.image('NEKO_JUMP2', require('../assets/N-3KO_JUMP2.png'))
         this.load.image('NEKO_JUMP3', require('../assets/N-3KO_JUMP3.png'))
@@ -58,10 +71,7 @@ export class BootScene extends Phaser.Scene {
         
 
         this.load.on('complete', () => {
-            console.log("everything is loaded")
-            
-            // add code here to switch to the start scene
-            this.scene.start("StartScene")
+            let timer = this.time.delayedCall(2000, this.startGame, null, this);
         })
     }
 }
