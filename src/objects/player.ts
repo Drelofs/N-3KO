@@ -3,19 +3,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Input.Keyboard.CursorKeys
 
     constructor(scene) {
-        super(scene, 200, 500, "NEKO_IDLE1")
+        super(scene, 0, 500, "NEKO_IDLE1")
 
         this.cursors = this.scene.input.keyboard.createCursorKeys()
-
-        create() {
-            this.input.gamepad.on('down', function (pad, button, index) {
-               console.log("gamepad connected!")
-            }
         
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
 
-        this.setCollideWorldBounds(false)
+        this.setCollideWorldBounds(true)
         this.setBounce(0.1)
         this.setDragX(800)
 
@@ -26,21 +21,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
 
     public update(): void {
-        console.log(this.y)
-
-        if(this.y > 1000) {
-            console.log("ik ben buiten beeld jongens!")
-            this.scene.scene.start("EndScene")
-        }
-
-     //Movement
-
-        // jump when the body is touching the floor
-        // let grounded = this.body.touching.down 
-        // if (this.cursors.up.isDown && grounded) {
-        //     this.setVelocityY(-500)
-        //     this.play("JUMP", true)
-        // }
         
         //GEDRAG
         if (this.cursors.left.isDown) {
