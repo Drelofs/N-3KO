@@ -31,31 +31,39 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         //     this.play("JUMP", true)
         // }
         
+        //GEDRAG
         if (this.cursors.left.isDown) {
             this.setVelocityX(-300)
             this.flipX = true
             if(this.cursors.space.isDown) {
                 this.setVelocityX(-400)
-                this.play("RUN", true)
-            } else {
-                this.play("WALK", true)
-            }
+            } 
         } else if (this.cursors.right.isDown) {
             this.setVelocityX(300)
             this.flipX = false
             if(this.cursors.space.isDown) {
                 this.setVelocityX(400)
+            }      
+         } 
+        
+        if (this.cursors.up.isDown && this.body.touching.down) {
+            this.setVelocityY(-500)
+        }
+        
+
+        //ANIMATIES
+        if (!this.body.touching.down) {
+            this.play("JUMP", true)
+        } else if(this.cursors.left.isDown || this.cursors.right.isDown) {
+            if (this.cursors.space.isDown) {
                 this.play("RUN", true)
             } else {
                 this.play("WALK", true)
             }
-         } else {
-           this.play("IDLE", true)
+        } else {
+            this.play("IDLE", true)
         }
-        // if (this.cursors.up.isDown && this.body.touching.down) {
-        //     this.setVelocityY(-500)
-        //     this.play("JUMP", true)
-        // }
+        
     }
 
 // ALL ANIMATIONS
@@ -115,7 +123,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 { key: 'NEKO_JUMP8', frame :"", duration: 50 }
             ],
             frameRate: 8,
-            repeat: -1
+            repeat: 1
         });
 
     }
