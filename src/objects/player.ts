@@ -3,14 +3,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Input.Keyboard.CursorKeys
 
     constructor(scene) {
-        super(scene, 200, 500, "NEKO_IDLE1")
+        super(scene, 0, 500, "NEKO_IDLE1")
 
         this.cursors = this.scene.input.keyboard.createCursorKeys()
         
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
 
-        this.setCollideWorldBounds(false)
+        this.setCollideWorldBounds(true)
         this.setBounce(0.1)
         this.setDragX(800)
 
@@ -21,46 +21,43 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
 
     public update(): void {
-        console.log(this.y)
-
-        if(this.y > 1000) {
-            console.log("ik ben buiten beeld jongens!")
-            this.scene.scene.start("EndScene")
-        }
-
-     //WALK
+        
+        //GEDRAG
         if (this.cursors.left.isDown) {
             this.setVelocityX(-300)
             this.flipX = true
             if(this.cursors.space.isDown) {
                 this.setVelocityX(-400)
-                this.play("RUN", true)
-            } else {
-                this.play("WALK", true)
-            }
+            } 
         } else if (this.cursors.right.isDown) {
             this.setVelocityX(300)
             this.flipX = false
             if(this.cursors.space.isDown) {
                 this.setVelocityX(400)
+            }      
+         } 
+        
+        if (this.cursors.up.isDown && this.body.touching.down) {
+            this.setVelocityY(-500)
+        }
+        
+
+        //ANIMATIES
+        if (!this.body.touching.down) {
+            this.play("JUMP", true)
+        } else if(this.cursors.left.isDown || this.cursors.right.isDown) {
+            if (this.cursors.space.isDown) {
                 this.play("RUN", true)
             } else {
                 this.play("WALK", true)
             }
-         } else {
-           this.play("IDLE", true)
+        } else {
+            this.play("IDLE", true)
         }
-
-        
-        // jump when the body is touching the floor
-        let grounded = this.body.touching.down 
-        if (this.cursors.up.isDown && grounded) {
-            this.setVelocityY(-500)
-            this.play("JUMP", true)
-        }
-        // this.play("WALK", true)
         
     }
+
+// ALL ANIMATIONS
 
     private createAnimations(){
 
@@ -117,7 +114,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 { key: 'NEKO_JUMP8', frame :"", duration: 50 }
             ],
             frameRate: 8,
-            repeat: -1
+            repeat: 1
         });
 
     }
