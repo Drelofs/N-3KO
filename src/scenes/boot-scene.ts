@@ -11,14 +11,16 @@ export class BootScene extends Phaser.Scene {
     init(){
     }
 
-    private startGame(){
-        console.log("Game begins")
-        console.log(this)
-        this.scene.start("StartScene")
-    }
+    // private startGame(){
+    //     console.log("Game begins")
+    //     console.log(this)
+    //     this.scene.start("LogoScene")
+    // }
 
     preload(): void {
         
+        this.load.image('logo', require('../assets/SenpaiGames.png'))
+        this.load.image('loading', require('../assets/loadingscreen.png'))
         this.load.image('sky', require('../assets/background.png'))
         this.load.image('WASTELAND1', require('../assets/WASTELAND1.jpg'))
         this.load.image('scrap', require('../assets/scrap.png'))
@@ -26,7 +28,6 @@ export class BootScene extends Phaser.Scene {
         this.load.image('bmo', require('../assets/bmo.png'))
         this.load.image('ice', require('../assets/platform_ice.png'))
         this.load.image('platform', require('../assets/platform_grass.png'))
-        // this.load.image('ground', require('../assets/platform_ground.png'))
         this.load.image('start', require('../assets/videogame.png'))
         this.load.image('cat', require('../assets/kittycat.png'))
         this.load.image('level_ice', require('../assets/level_ice.png'))
@@ -40,7 +41,6 @@ export class BootScene extends Phaser.Scene {
         
         
         // N-3KO Sprites
-
         //Idle sprites
         this.load.image('NEKO_IDLE1', require('../assets/N-3KO_IDLE1.png'))
         this.load.image('NEKO_IDLE2', require('../assets/N-3KO_IDLE2.png'))
@@ -71,7 +71,8 @@ export class BootScene extends Phaser.Scene {
         
 
         this.load.on('complete', () => {
-            let timer = this.time.delayedCall(2000, this.startGame, null, this);
+            // let timer = this.time.delayedCall(2000, this.startGame, null, this);
+            this.scene.start("LogoScene")
         })
     }
 }

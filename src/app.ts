@@ -1,5 +1,7 @@
 import "phaser";
 import { BootScene } from "./scenes/boot-scene"
+import { LogoScene } from "./scenes/logo-scene"
+import { LoadingScene } from "./scenes/loading-scene"
 import { StartScene } from "./scenes/start-scene"
 import { GameScene } from "./scenes/game-scene"
 import { EndScene } from "./scenes/end-scene"
@@ -10,7 +12,7 @@ const config: GameConfig = {
     height: 900,
     parent: "game",
     resolution: window.devicePixelRatio,
-    scene: [BootScene, StartScene, GameScene, EndScene, GameScene2],
+    scene: [BootScene, LogoScene, LoadingScene, StartScene, GameScene, EndScene, GameScene2],
     input: {
         keyboard: true
     },
