@@ -14,7 +14,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
 
-        this.setCollideWorldBounds(true)
+        this.setCollideWorldBounds(false)
         this.setBounce(0.1)
         this.setDragX(800)
 
@@ -26,7 +26,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
 
     public update(): void {
-        
+        if(this.y > 1000) {
+            console.log("ik ben buiten beeld jongens!")
+            this.scene.scene.start("EndScene")
+        }
         //GEDRAG
         if (this.cursors.left.isDown || this.left == 1)  {
             this.setVelocityX(-300)
