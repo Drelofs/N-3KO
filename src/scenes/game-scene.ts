@@ -3,11 +3,14 @@ import { enemy } from "../objects/bomb"
 import { Platform } from "../objects/platform"
 import { MovingPlatform } from "../objects/movingplatform"
 import { isAbsolute } from "path";
+import { Arcade } from "../../arcade/arcade"
 
 
 
 export class GameScene extends Phaser.Scene {
 
+    private arcade : Arcade
+    private joystickListener: EventListener
     private player : Player
     private platforms: Phaser.GameObjects.Group
     private scraps: Phaser.Physics.Arcade.Group
@@ -21,6 +24,16 @@ export class GameScene extends Phaser.Scene {
 
     constructor() {
         super({ key: "GameScene" })
+
+        this.arcade = new Arcade()
+        
+        // The game must wait for de joysticks to connect
+        document.addEventListener("joystick0button0", () => this.playerOneFire())
+    }
+
+    private playerOneFire() {
+        console.log("Fire");
+        
     }
 
     init(): void {
@@ -104,9 +117,40 @@ export class GameScene extends Phaser.Scene {
         }
     }
 
+    // private gameLoop() : void {
+
+    //     for(let joystick of this.arcade.Joysticks){
+    //         joystick.update()
+
+    //         // example: read directions as true / false
+    //         if(joystick.Left)  console.log('LEFT')
+    //         if(joystick.Right) console.log('RIGHT')
+    //         if(joystick.Up)    console.log('UP')
+    //         if(joystick.Down)  console.log('Down')
+    //     }
+
+    //     requestAnimationFrame(() => this.gameLoop())
+    // }
+
+    
+
     update(){
         this.player.update()
         this.bgtile.tilePositionX += 1
+
+        for(let joystick of this.arcade.Joysticks){
+            joystick.update()
+            
+            // just log the values
+            if(joystick.Left)  console.log('LEFT')
+            if(joystick.Right) console.log('RIGHT')
+            if(joystick.Up)    console.log('UP')
+            if(joystick.Down)  console.log('Down')
+            
+            // use the values to set X and Y velocity of a player
+            this.player.setVelocityX(joystick.X * 400)
+            this.player.setVelocityY(joystick.Y * 400)
+        }
     }
 
 }

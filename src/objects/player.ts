@@ -1,6 +1,10 @@
+import { Arcade } from "../../arcade/arcade"
+import { Joystick } from "../../arcade/input/joystick"
+
 export class Player extends Phaser.Physics.Arcade.Sprite {
 
     private cursors: Phaser.Input.Keyboard.CursorKeys
+    private left = 0
 
     constructor(scene) {
         super(scene, 0, 500, "NEKO_IDLE1")
@@ -17,13 +21,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.createAnimations()
         this.play("IDLE", true)
 
+
     }
 
 
     public update(): void {
         
         //GEDRAG
-        if (this.cursors.left.isDown) {
+        if (this.cursors.left.isDown || this.left == 1)  {
             this.setVelocityX(-300)
             this.flipX = true
             if(this.cursors.space.isDown) {
@@ -54,6 +59,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         } else {
             this.play("IDLE", true)
         }
+        
         
     }
 
