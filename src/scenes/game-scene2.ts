@@ -42,6 +42,7 @@ export class GameScene2 extends Phaser.Scene {
         this.platforms = this.add.group({ runChildUpdate: true })
         this.platforms.addMultiple([
             new Platform(this, 800, 870, "ground"),
+            // new Platform(this, 400, 300, "HILL1"),
             // new Platform(this, 200, 150, "ice"),
             // new MovingPlatform(this, 300, 300, "platform"),
             // new Platform(this, 500, 200, "platform"),
