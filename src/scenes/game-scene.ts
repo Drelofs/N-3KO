@@ -65,9 +65,12 @@ export class GameScene extends Phaser.Scene {
         this.player = new Player(this)
 
         this.hills = this.add.group({ runChildUpdate: true })
-        this.hills.addMultiple([
-            new Hill(this, 400, 870, "HILL1"),
-        ], true)
+
+        //HILL1
+        const hill : Hill = (this.hills.children.entries[0]) as Hill
+
+        this.physics.add.collider(this.player, hill)
+        this.hills.add(new Hill(this, 400, 900, 'HILL2'), true);
 
         this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
         this.livesField = this.add.text(900, 300,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
@@ -110,7 +113,7 @@ export class GameScene extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
         
-        if(this.collectedScraps == 4){
+        if(this.collectedScraps == 7){
             this.scene.start('GameScene2')
            this.collectedScraps = 0
         }
