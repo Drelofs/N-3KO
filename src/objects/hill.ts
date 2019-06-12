@@ -4,9 +4,6 @@ export class Hill extends Phaser.Physics.Arcade.Sprite{
 
     private speed:number
 
-    protected width: 100
-    protected height: 100
-
     constructor(scene, x: number, y: number, texture:string, friction:number = 1) {
         super(scene, x, y, texture)
 

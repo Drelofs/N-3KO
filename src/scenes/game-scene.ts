@@ -1,9 +1,6 @@
 import { Player } from "../objects/player"
 import { enemy } from "../objects/bomb"
-import { Platform } from "../objects/platform"
 import { Hill } from "../objects/hill"
-import { MovingPlatform } from "../objects/movingplatform"
-import { isAbsolute } from "path";
 import { Arcade } from "../../arcade/arcade"
 
 
@@ -13,16 +10,18 @@ export class GameScene extends Phaser.Scene {
     private arcade : Arcade
     private joystickListener: EventListener
     private player : Player
-    private platforms: Phaser.GameObjects.Group
     private hills: Phaser.GameObjects.Group
     private scraps: Phaser.Physics.Arcade.Group
     private collectedScraps = 0
-    private scoreField 
+    private scoreField
     private enemies: Phaser.GameObjects.Group
     private bgtile: Phaser.GameObjects.TileSprite
 
     private lives = 9
     private livesField
+
+    private timer : Phaser.Time.TimerEvent
+    private hitTimeout = false
 
     constructor() {
         super({ key: "GameScene" })
@@ -57,7 +56,7 @@ export class GameScene extends Phaser.Scene {
 
         this.enemies = this.add.group()
         for (let i =0; i <1; i++){
-            this.enemies.add(new enemy(this, 700, 755), true)
+            this.enemies.add(new enemy(this, 700, 255), true)
         }
 
         // TODO add player and enemy
@@ -73,7 +72,7 @@ export class GameScene extends Phaser.Scene {
         this.hills.add(new Hill(this, 400, 900, 'HILL2'), true);
 
         this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
-        this.livesField = this.add.text(900, 300,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+        this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.hills)
@@ -92,15 +91,47 @@ export class GameScene extends Phaser.Scene {
 
     }
 
-    private hitEnemy(player: Player, enemy) {
-        
-        this.registry.values.lives--
-        this.lives--
-        this.livesField.text = this.lives+ ' Lives Left'
+    private setTimer() {
+        this.hitTimeout = false
+    }
 
+    private startAlpha() {
+        this.player.alpha = 0
+    }
+
+    private endAlpha() {
+        this.player.alpha = 1
+    }
+
+    private hitEnemy(player: Player, enemy: enemy, ) {
+        if(this.hitTimeout == false) {
+            this.registry.values.lives--
+            this.lives--
+            this.livesField.text = this.lives + ' Lives Left'
+            this.hitTimeout = true
+            this.timer = this.time.addEvent({
+                delay: 2000,
+                callback: () => this.setTimer(),
+                repeat: 0,
+            })
+            this.add.tween({
+                targets: this.player,
+                ease: 'Sine.easeInOut',
+                duration: 500,
+                alpha: 0.5,
+                yoyo:true,
+                repeat:4
+            })
+        }
+
+       
+        
+
+        // Game over. Reset scraps & Lives
         if (this.lives === 0) {
             this.collectedScraps = 0;
             this.scene.start("EndScene")
+            this.lives = 9
         }
     }
 
