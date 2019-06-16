@@ -68,7 +68,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
 // ALL ANIMATIONS
 
-    private createAnimations(){
+    public createAnimations(){
 
         // N-3KO IDLE
         this.scene.anims.create({

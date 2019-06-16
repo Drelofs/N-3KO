@@ -116,24 +116,6 @@ export class GameScene extends Phaser.Scene {
            
         }
     }
-
-    // private gameLoop() : void {
-
-    //     for(let joystick of this.arcade.Joysticks){
-    //         joystick.update()
-
-    //         // example: read directions as true / false
-    //         if(joystick.Left)  console.log('LEFT')
-    //         if(joystick.Right) console.log('RIGHT')
-    //         if(joystick.Up)    console.log('UP')
-    //         if(joystick.Down)  console.log('Down')
-    //     }
-
-    //     requestAnimationFrame(() => this.gameLoop())
-    // }
-
-    
-
     update(){
         this.player.update()
         this.bgtile.tilePositionX += 1
