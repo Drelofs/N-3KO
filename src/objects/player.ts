@@ -16,7 +16,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.setCollideWorldBounds(false)
         this.setBounce(0.1)
-        this.setDragX(800)
+        this.setDragX(1000)
 
         this.createAnimations()
         this.play("IDLE", true)

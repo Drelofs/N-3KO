@@ -1,8 +1,6 @@
 import { Player } from "../objects/player"
 import { enemy } from "../objects/bomb"
-import { Platform } from "../objects/platform"
-import { MovingPlatform } from "../objects/movingplatform"
-import { isAbsolute } from "path";
+import { Hill } from "../objects/hill"
 import { Arcade } from "../../arcade/arcade"
 
 
@@ -12,15 +10,18 @@ export class GameScene extends Phaser.Scene {
     private arcade : Arcade
     private joystickListener: EventListener
     private player : Player
-    private platforms: Phaser.GameObjects.Group
+    private hills: Phaser.GameObjects.Group
     private scraps: Phaser.Physics.Arcade.Group
     private collectedScraps = 0
-    private scoreField 
+    private scoreField
     private enemies: Phaser.GameObjects.Group
     private bgtile: Phaser.GameObjects.TileSprite
 
     private lives = 9
     private livesField
+
+    private timer : Phaser.Time.TimerEvent
+    private hitTimeout = false
 
     constructor() {
         super({ key: "GameScene" })
@@ -55,28 +56,28 @@ export class GameScene extends Phaser.Scene {
 
         this.enemies = this.add.group()
         for (let i =0; i <1; i++){
-            this.enemies.add(new enemy(this, 700, 755), true)
+            this.enemies.add(new enemy(this, 700, 255), true)
         }
 
         // TODO add player and enemy
         
         this.player = new Player(this)
 
-        this.platforms = this.add.group({ runChildUpdate: true })
-        this.platforms.addMultiple([
-            // new Platform(this, 800, 870, "ground"),
-            new Platform(this, 800, 870, "platform"),
-            new Platform(this, 200, 700, "platform"),
-            // new MovingPlatform(this, 900, 400, "platform")
-        ], true)
+        this.hills = this.add.group({ runChildUpdate: true })
+
+        //HILL1
+        const hill : Hill = (this.hills.children.entries[0]) as Hill
+
+        this.physics.add.collider(this.player, hill)
+        this.hills.add(new Hill(this, 400, 900, 'HILL2'), true);
 
         this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
-        this.livesField = this.add.text(900, 300,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+        this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
         // define collisions for bouncing, and overlaps for pickups
-        this.physics.add.collider(this.scraps, this.platforms)
-        this.physics.add.collider(this.player, this.platforms)
-        this.physics.add.collider(this.enemies, this.platforms)
+        this.physics.add.collider(this.scraps, this.hills)
+        this.physics.add.collider(this.player, this.hills)
+        this.physics.add.collider(this.enemies, this.hills)
         
         this.physics.add.overlap(this.player, this.scraps, this.collectScraps, null, this)
         this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this)
@@ -90,15 +91,47 @@ export class GameScene extends Phaser.Scene {
 
     }
 
-    private hitEnemy(player: Player, enemy) {
-        
-        this.registry.values.lives--
-        this.lives--
-        this.livesField.text = this.lives+ ' Lives Left'
+    private setTimer() {
+        this.hitTimeout = false
+    }
 
+    private startAlpha() {
+        this.player.alpha = 0
+    }
+
+    private endAlpha() {
+        this.player.alpha = 1
+    }
+
+    private hitEnemy(player: Player, enemy: enemy, ) {
+        if(this.hitTimeout == false) {
+            this.registry.values.lives--
+            this.lives--
+            this.livesField.text = this.lives + ' Lives Left'
+            this.hitTimeout = true
+            this.timer = this.time.addEvent({
+                delay: 2000,
+                callback: () => this.setTimer(),
+                repeat: 0,
+            })
+            this.add.tween({
+                targets: this.player,
+                ease: 'Sine.easeInOut',
+                duration: 500,
+                alpha: 0.5,
+                yoyo:true,
+                repeat:4
+            })
+        }
+
+       
+        
+
+        // Game over. Reset scraps & Lives
         if (this.lives === 0) {
             this.collectedScraps = 0;
             this.scene.start("EndScene")
+            this.lives = 9
         }
     }
 
@@ -111,9 +144,9 @@ export class GameScene extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
         
-        if(this.collectedScraps == 21){
+        if(this.collectedScraps == 7){
             this.scene.start('GameScene2')
-           
+           this.collectedScraps = 0
         }
     }
     update(){

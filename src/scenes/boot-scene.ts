@@ -1,4 +1,5 @@
 import { Game } from "phaser";
+import { LogoScene } from "./logo-scene";
 
 export class BootScene extends Phaser.Scene {
 
@@ -32,6 +33,13 @@ export class BootScene extends Phaser.Scene {
         this.load.image('cat', require('../assets/kittycat.png'))
         this.load.image('level_ice', require('../assets/level_ice.png'))
         this.load.image('ground', require('../assets/ground.jpg'))
+
+        //HILLS
+        this.load.image('HILL1', require('../assets/HILL_1.png'))
+        this.load.image('HILL2', require('../assets/HILL_2.png'))
+        this.load.image('HILL3', require('../assets/HILL_3.png'))
+        this.load.image('HILL4', require('../assets/HILL_4.png'))
+        this.load.image('HILL5', require('../assets/HILL_5.png'))
 
         // RoboAnimals
         this.load.image('raElephant', require('../assets/RoboAnimals/raElephant.png'))
