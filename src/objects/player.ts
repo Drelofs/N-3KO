@@ -45,13 +45,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.cursors.left.isDown || this.left == 1)  {
             this.setVelocityX(-300)
             this.flipX = true
-            if(this.cursors.space.isDown) {
+            if(this.cursors.shift.isDown) {
                 this.setVelocityX(-400)
             } 
         } else if (this.cursors.right.isDown) {
             this.setVelocityX(300)
             this.flipX = false
-            if(this.cursors.space.isDown) {
+            if(this.cursors.shift.isDown) {
                 this.setVelocityX(400)
             }      
          } 
@@ -65,7 +65,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (!this.body.touching.down) {
             this.play("JUMP", true)
         } else if(this.cursors.left.isDown || this.cursors.right.isDown) {
-            if (this.cursors.space.isDown) {
+            if (this.cursors.shift.isDown) {
                 this.play("RUN", true)
             } else {
                 this.play("WALK", true)

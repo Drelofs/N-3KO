@@ -81,13 +81,18 @@ export class GameScene extends Phaser.Scene {
         //PLATFORM  
         // const platform : Platform = (this.platform.children.entries[0]) as Platform
         this.physics.add.collider(this.player, this.platform)
-        this.platform.add(new Platform(this, 400, 500, 'FLAT1'), true)
+        this.platform.add(new Platform(this, 300, 800, 'FLAT1'), true)
+        this.platform.add(new Platform(this, 900, 800, 'MEDIUM1'), true)
+        this.platform.add(new Platform(this, 400, 400, 'AIR1'), true)
+        this.platform.add(new Platform(this, 1300, 150, 'AIR2'), true)
 
-        //HILL1
-        const hill : Hill = (this.hills.children.entries[0]) as Hill
 
-        this.physics.add.collider(this.player, hill)
-        this.hills.add(new Hill(this, 400, 900, 'HILL2'), true);
+
+        // //HILL1
+        // const hill : Hill = (this.hills.children.entries[0]) as Hill
+
+        // this.physics.add.collider(this.player, hill)
+        // this.hills.add(new Hill(this, 400, 900, 'HILL2'), true);
 
         
 
@@ -97,9 +102,9 @@ export class GameScene extends Phaser.Scene {
         this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
         // define collisions for bouncing, and overlaps for pickups
-        this.physics.add.collider(this.scraps, this.hills)
-        this.physics.add.collider(this.player, this.hills)
-        this.physics.add.collider(this.enemies, this.hills)
+        this.physics.add.collider(this.scraps, this.platform)
+        this.physics.add.collider(this.player, this.platform)
+        this.physics.add.collider(this.enemies, this.platform)
         
         this.physics.add.overlap(this.player, this.scraps, this.collectScraps, null, this)
         this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this)
