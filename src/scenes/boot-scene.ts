@@ -76,6 +76,9 @@ export class BootScene extends Phaser.Scene {
         this.load.image('NEKO_JUMP6', require('../assets/N-3KO_JUMP6.png'))
         this.load.image('NEKO_JUMP7', require('../assets/N-3KO_JUMP7.png'))
         this.load.image('NEKO_JUMP8', require('../assets/N-3KO_JUMP8.png'))
+
+        //Lasers
+        this.load.image('laser', require('../assets/laser.png'))
         
 
         this.load.on('complete', () => {
