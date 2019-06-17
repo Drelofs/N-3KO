@@ -3,6 +3,7 @@ import { enemy } from "../objects/bomb"
 import { Hill } from "../objects/hill"
 import { Arcade } from "../../arcade/arcade"
 import { Bullet } from "../objects/bullet"
+import { Platform } from "../objects/platform"
 
 
 
@@ -12,6 +13,7 @@ export class GameScene extends Phaser.Scene {
     private joystickListener: EventListener
     private player : Player
     private hills: Phaser.GameObjects.Group
+    private platform: Phaser.GameObjects.Group
     private scraps: Phaser.Physics.Arcade.Group
     private bulletGroup: Phaser.GameObjects.Group
     private collectedScraps = 0
@@ -19,7 +21,7 @@ export class GameScene extends Phaser.Scene {
     private enemies: Phaser.GameObjects.Group
     private bgtile: Phaser.GameObjects.TileSprite
 
-    private lives = 9
+    private lives = 2
     private livesField
 
     private timer : Phaser.Time.TimerEvent
@@ -72,13 +74,27 @@ export class GameScene extends Phaser.Scene {
         
         this.player = new Player(this)
 
+
+        this.platform = this.add.group({ runChildUpdate: true})
         this.hills = this.add.group({ runChildUpdate: true })
 
-        //HILL1
-        const hill : Hill = (this.hills.children.entries[0]) as Hill
+        //PLATFORM  
+        // const platform : Platform = (this.platform.children.entries[0]) as Platform
+        this.physics.add.collider(this.player, this.platform)
+        this.platform.add(new Platform(this, 300, 800, 'FLAT1'), true)
+        this.platform.add(new Platform(this, 900, 800, 'MEDIUM1'), true)
+        this.platform.add(new Platform(this, 400, 400, 'AIR1'), true)
+        this.platform.add(new Platform(this, 1300, 150, 'AIR2'), true)
 
-        this.physics.add.collider(this.player, hill)
-        this.hills.add(new Hill(this, 400, 900, 'HILL2'), true);
+
+
+        // //HILL1
+        // const hill : Hill = (this.hills.children.entries[0]) as Hill
+
+        // this.physics.add.collider(this.player, hill)
+        // this.hills.add(new Hill(this, 400, 900, 'HILL2'), true);
+
+        
 
         this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED',
         { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
@@ -86,9 +102,9 @@ export class GameScene extends Phaser.Scene {
         this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
         // define collisions for bouncing, and overlaps for pickups
-        this.physics.add.collider(this.scraps, this.hills)
-        this.physics.add.collider(this.player, this.hills)
-        this.physics.add.collider(this.enemies, this.hills)
+        this.physics.add.collider(this.scraps, this.platform)
+        this.physics.add.collider(this.player, this.platform)
+        this.physics.add.collider(this.enemies, this.platform)
         
         this.physics.add.overlap(this.player, this.scraps, this.collectScraps, null, this)
         this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this)
