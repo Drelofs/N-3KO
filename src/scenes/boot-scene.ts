@@ -12,11 +12,6 @@ export class BootScene extends Phaser.Scene {
     init(){
     }
 
-    // private startGame(){
-    //     console.log("Game begins")
-    //     console.log(this)
-    //     this.scene.start("LogoScene")
-    // }
 
     preload(): void {
         
@@ -78,12 +73,12 @@ export class BootScene extends Phaser.Scene {
         this.load.image('NEKO_JUMP8', require('../assets/N-3KO_JUMP8.png'))
 
         //Lasers
-        this.load.image('laser', require('../assets/laser.png'))
+        this.load.image('bullet', require('../assets/laser.png'))
         
 
         this.load.on('complete', () => {
             // let timer = this.time.delayedCall(2000, this.startGame, null, this);
-            this.scene.start("LogoScene")
+            this.scene.start("GameScene")
         })
     }
 }
