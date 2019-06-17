@@ -25,6 +25,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image('ice', require('../assets/platform_ice.png'))
         this.load.image('platform', require('../assets/platform_grass.png'))
         this.load.image('start', require('../assets/videogame.png'))
+        this.load.image('trophy', require('../assets/trophy.png'))
         this.load.image('cat', require('../assets/kittycat.png'))
         this.load.image('level_ice', require('../assets/level_ice.png'))
         this.load.image('ground', require('../assets/ground.jpg'))
@@ -78,7 +79,7 @@ export class BootScene extends Phaser.Scene {
 
         this.load.on('complete', () => {
             // let timer = this.time.delayedCall(2000, this.startGame, null, this);
-            this.scene.start("GameScene")
+            this.scene.start("StartScene")
         })
     }
 }
