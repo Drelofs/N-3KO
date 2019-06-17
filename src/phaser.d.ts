@@ -17244,6 +17244,7 @@ declare namespace Phaser {
          * Groups themselves aren't displayable, and can't be positioned, rotated, scaled, or hidden.
          */
         class Group {
+            body: any;
             /**
              * 
              * @param scene The scene this group belongs to.
