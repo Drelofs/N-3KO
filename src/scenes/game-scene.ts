@@ -2,6 +2,7 @@ import { Player } from "../objects/player"
 import { enemy } from "../objects/bomb"
 import { Hill } from "../objects/hill"
 import { Arcade } from "../../arcade/arcade"
+import { Bullet } from "../objects/bullet"
 
 
 
@@ -12,6 +13,7 @@ export class GameScene extends Phaser.Scene {
     private player : Player
     private hills: Phaser.GameObjects.Group
     private scraps: Phaser.Physics.Arcade.Group
+    private bulletGroup: Phaser.GameObjects.Group
     private collectedScraps = 0
     private scoreField
     private enemies: Phaser.GameObjects.Group
@@ -37,6 +39,11 @@ export class GameScene extends Phaser.Scene {
         
     }
 
+    public friendlyBullet() {
+        this.bulletGroup.add(new Bullet(this, this.player.x+20,  this.player.y), true)
+        console.log("Fire!")
+    }
+
     init(): void {
         console.log("dit is de gamescene")
 
@@ -45,6 +52,8 @@ export class GameScene extends Phaser.Scene {
     create(): void {
         this.bgtile = this.add.tileSprite(0, 0, 1800, 900, 'WASTELAND1')
         this.bgtile.setOrigin(0,0)
+
+        this.bulletGroup = this.add.group({ runChildUpdate: true})
 
        
         // 11 SCRAPS

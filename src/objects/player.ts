@@ -1,56 +1,15 @@
- import { Game } from "../app" 
+import { GameScene } from "../scenes/game-scene";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
 
     private cursors: Phaser.Input.Keyboard.CursorKeys
     private left = 0
-    // private lasers
-    // private add
-
-    // public create() {
- 
-    //     // Create the group using the group factory
-    //     this.lasers = this.add.group();
-    //     // To move the sprites later on, we have to enable the body
-    //     this.lasers.enableBody = true;
-    //     // We're going to set the body type to the ARCADE physics, since we don't need any advanced physics
-    //     this.lasers.physicsBodyType = Phaser.Physics.Arcade;
-    //     /*
-     
-    //         This will create 20 sprites and add it to the stage. They're inactive and invisible, but they're there for later use.
-    //         We only have 20 laser bullets available, and will 'clean' and reset they're off the screen.
-    //         This way we save on precious resources by not constantly adding & removing new sprites to the stage
-     
-    //     */
-    //     this.lasers.createMultiple(20, 'laser');
-     
-    //     /*
-     
-    //         Behind the scenes, this will call the following function on all lasers:
-    //             - events.onOutOfBounds.add(resetLaser)
-    //         Every sprite has an 'events' property, where you can add callbacks to specific events.
-    //         Instead of looping over every sprite in the group manually, this function will do it for us.
-     
-    //     */
-    //     this.lasers.callAll('events.onOutOfBounds.add', 'events.onOutOfBounds', this.resetLaser);
-    //     // Same as above, set the anchor of every sprite to 0.5, 1.0
-    //     this.lasers.callAll('anchor.setTo', 'anchor', 0.5, 1.0);
-     
-    //     // This will set 'checkWorldBounds' to true on all sprites in the group
-    //     this.lasers.setAll('checkWorldBounds', true);
-     
-    //     // ...
-     
-    // }
-
-    // private resetLaser(laser) {
-    //     // Destroy the laser
-    //     laser.kill();
-    // }
+    private GameScene : GameScene
+    
 
     constructor(scene) {
         super(scene, 0, 500, "NEKO_IDLE1")
-
+        this.GameScene = scene as GameScene
         this.cursors = this.scene.input.keyboard.createCursorKeys()
         
         this.scene.add.existing(this)
@@ -63,7 +22,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.createAnimations()
         this.play("IDLE", true)
 
+        // document.addEventListener("button0", () => this.handleFireButton())
 
+
+    }
+
+    private handleFireButton():void{
+        this.GameScene.friendlyBullet()
     }
 
 
@@ -71,6 +36,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if(this.y > 1000) {
             console.log("ik ben buiten beeld jongens!")
             this.scene.scene.start("EndScene")
+        }
+        if(this.scene.input.keyboard.checkDown(this.cursors.space, 500)){
+            this.handleFireButton()
+            console.log("Fire")
         }
         //GEDRAG
         if (this.cursors.left.isDown || this.left == 1)  {
