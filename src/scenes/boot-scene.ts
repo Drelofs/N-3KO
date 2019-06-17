@@ -36,6 +36,9 @@ export class BootScene extends Phaser.Scene {
         this.load.image('HILL4', require('../assets/HILL_4.png'))
         this.load.image('HILL5', require('../assets/HILL_5.png'))
 
+        //PLATFORMS
+        this.load.image('FLAT1', require('../assets/FLAT_PLATFORM1.png'))
+
         // RoboAnimals
         this.load.image('raElephant', require('../assets/RoboAnimals/raElephant.png'))
 
