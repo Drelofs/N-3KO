@@ -17,18 +17,22 @@ export class BootScene extends Phaser.Scene {
         
         this.load.image('logo', require('../assets/SenpaiGames.png'))
         this.load.image('loading', require('../assets/loadingscreen.png'))
-        this.load.image('sky', require('../assets/background.png'))
-        this.load.image('WASTELAND1', require('../assets/WASTELAND1.jpg'))
         this.load.image('scrap', require('../assets/scrap.png'))
+        this.load.image('ice', require('../assets/platform_ice.png'))
         this.load.image('bomb', require('../assets/bomb.png'))
         this.load.image('bmo', require('../assets/bmo.png'))
-        this.load.image('ice', require('../assets/platform_ice.png'))
         this.load.image('platform', require('../assets/platform_grass.png'))
         this.load.image('start', require('../assets/videogame.png'))
         this.load.image('trophy', require('../assets/trophy.png'))
         this.load.image('cat', require('../assets/kittycat.png'))
-        this.load.image('level_ice', require('../assets/level_ice.png'))
+        
         this.load.image('ground', require('../assets/ground.jpg'))
+
+        //BACKGROUNDS
+        this.load.image('sky', require('../assets/background.png'))
+        this.load.image('WASTELAND1', require('../assets/WASTELAND1.jpg'))
+        this.load.image('level_ice', require('../assets/level_ice.png'))
+        this.load.image('pixels', require('../assets/pixelBackground.jpg'))
 
         //HILLS
         this.load.image('HILL1', require('../assets/HILL_1.png'))
@@ -45,8 +49,6 @@ export class BootScene extends Phaser.Scene {
         this.load.image('MEDIUM2', require('../assets/MEDIUM_PLATFORM2.png'))
         this.load.image('AIR1', require('../assets/AIR_PLATFORM1.png'))
         this.load.image('AIR2', require('../assets/AIR_PLATFORM2.png'))
-
-        
 
         // RoboAnimals
         this.load.image('raElephant', require('../assets/RoboAnimals/raElephant.png'))
