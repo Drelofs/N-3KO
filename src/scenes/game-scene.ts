@@ -20,6 +20,7 @@ export class GameScene extends Phaser.Scene {
     private scoreField
     private enemies: Phaser.GameObjects.Group
     private bgtile: Phaser.GameObjects.TileSprite
+    // private bullet : Bullet
 
     private lives = 2
     private livesField
@@ -66,8 +67,8 @@ export class GameScene extends Phaser.Scene {
         })
 
         this.enemies = this.add.group()
-        for (let i =0; i <1; i++){
-            this.enemies.add(new enemy(this, 700, 255), true)
+        for (let i =0; i <4; i++){
+            this.enemies.add(new enemy(this, 250*i+250, 255), true)
         }
 
         // TODO add player and enemy
@@ -108,6 +109,9 @@ export class GameScene extends Phaser.Scene {
         
         this.physics.add.overlap(this.player, this.scraps, this.collectScraps, null, this)
         this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this)
+
+
+        this.physics.add.overlap(this.bulletGroup, this.enemies, this.killEnemy, null, this)
 
         this.physics.world.bounds.width = 1440 * 2
         this.physics.world.bounds.height = 900
@@ -151,6 +155,13 @@ export class GameScene extends Phaser.Scene {
         }
     }
 
+    private killEnemy(bullet: Bullet, enemy : enemy) {
+        console.log("enemy geraakt!")
+        console.log(bullet)
+        console.log(enemy)
+        this.enemies.remove(enemy, true, true)
+    }
+
 
     private collectScraps(player : Player , scraps) : void {
         this.scraps.remove(scraps, true, true)
@@ -160,7 +171,7 @@ export class GameScene extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
         
-        if(this.collectedScraps == 7){
+        if(this.collectedScraps == 20){
             this.scene.start('GameScene2')
            this.collectedScraps = 0
         }
