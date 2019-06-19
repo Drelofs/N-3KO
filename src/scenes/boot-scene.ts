@@ -22,9 +22,10 @@ export class BootScene extends Phaser.Scene {
         this.load.image('bomb', require('../assets/bomb.png'))
         this.load.image('bmo', require('../assets/bmo.png'))
         this.load.image('platform', require('../assets/platform_grass.png'))
-        this.load.image('start', require('../assets/videogame.png'))
+        this.load.image('start', require('../assets/start.png'))
         this.load.image('trophy', require('../assets/trophy.png'))
         this.load.image('cat', require('../assets/kittycat.png'))
+        this.load.image('backArrow', require('../assets/backArrow.png'))
         
         this.load.image('ground', require('../assets/ground.jpg'))
 
@@ -51,7 +52,12 @@ export class BootScene extends Phaser.Scene {
         this.load.image('AIR2', require('../assets/AIR_PLATFORM2.png'))
 
         // RoboAnimals
-        this.load.image('raElephant', require('../assets/RoboAnimals/raElephant.png'))
+        this.load.image('raElephant', require('../assets/RoboAnimals/collectibles/raElephant.png'))
+        this.load.image('raFox', require('../assets/RoboAnimals/collectibles/raFox.png'))
+        this.load.image('raGiraffe', require('../assets/RoboAnimals/collectibles/raGiraffe.png'))
+        this.load.image('raGorilla', require('../assets/RoboAnimals/collectibles/raGorilla.png'))
+        this.load.image('raHippo', require('../assets/RoboAnimals/collectibles/raHippo.png'))
+        this.load.image('raTurtle', require('../assets/RoboAnimals/collectibles/raTurtle.png'))
 
         // Enemies
         this.load.image('enemy', require('../assets/ghoul.png'))

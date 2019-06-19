@@ -36,8 +36,24 @@ export class Collectibles extends Phaser.Scene {
     }
 
     create(): void {
-        this.bgtile = this.add.tileSprite(0, 0, 1800, 900, 'WASTELAND1')
+        this.bgtile = this.add.tileSprite(0, 0, 1800, 900, 'pixels')
         this.bgtile.setOrigin(0,0)
+
+        this.add.text(700, 60, 'COLLECT ALL ROBOANIMALS',
+        { fontFamily: 'Arial Black', fontSize: 30, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+
+        this.add.image(350,300, 'raElephant')
+        this.add.image(650,300, 'raFox')
+        this.add.image(950,300, 'raGiraffe')
+        this.add.image(350,600, 'raGorilla')
+        this.add.image(650,600, 'raHippo')
+        this.add.image(950,600, 'raTurtle')
+
+        let back = this.add.image(100,50, 'backArrow')
+        back.setInteractive()
+        back.on('pointerdown', (pointer) => {
+        this.scene.start('StartScene')
+        })
     }
 
    
