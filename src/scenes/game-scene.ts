@@ -4,6 +4,7 @@ import { Arcade } from "../arcade/arcade"
 import { Bullet } from "../objects/bullet"
 import { Platform } from "../objects/platform"
 import { threadId } from "worker_threads";
+import { Neko } from "../app"
 
 export class GameScene extends Phaser.Scene {
 
@@ -34,16 +35,6 @@ export class GameScene extends Phaser.Scene {
 
     constructor() {
         super({ key: "GameScene" })
-        
-        this.arcade = new Arcade()
-        
-        // The game must wait for de joysticks to connect
-        document.addEventListener("joystick0button0", () => this.playerOneFire())
-    }
-
-    private playerOneFire() {
-        console.log("Fire");
-        
     }
 
     public friendlyBullet() {
@@ -52,8 +43,9 @@ export class GameScene extends Phaser.Scene {
     }
 
     init(): void {
-        console.log("dit is de gamescene")
-
+        let g = this.game as Neko
+        this.arcade = g.arcade
+        
     }
 
     create(): void {
@@ -184,7 +176,7 @@ export class GameScene extends Phaser.Scene {
     update(){
         this.player.update()
         this.bgtile.tilePositionX += 1
-
+        
         /*
         for(let joystick of this.arcade.Joysticks){
             joystick.update()
@@ -200,6 +192,7 @@ export class GameScene extends Phaser.Scene {
             this.player.setVelocityY(joystick.Y * 400)
         }
         */
+        
     }
 
 }

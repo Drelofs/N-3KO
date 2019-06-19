@@ -1,11 +1,13 @@
 import { GameScene } from "../scenes/game-scene";
+import { Arcade } from "../arcade/arcade"
+import { Neko } from "../app"
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
 
     private cursors: Phaser.Input.Keyboard.CursorKeys
     private left = 0
     private GameScene : GameScene
-    
+    private arcade : Arcade
 
     constructor(scene) {
         super(scene, 0, 500, "NEKO_IDLE1")
@@ -22,27 +24,36 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.createAnimations()
         this.play("IDLE", true)
 
-        // document.addEventListener("button0", () => this.handleFireButton())
+        console.log("creating player")
 
 
+        let g = this.scene.game as Neko
+        this.arcade = g.arcade
+
+        console.log("init joysticks")
+        console.log(this.arcade)
+
+        document.addEventListener("joystick0button0", () => this.handleFireButton())
     }
 
     private handleFireButton():void{
         this.GameScene.friendlyBullet()
     }
 
+    private joystickInput():void {
+        console.log("reading joystick")
+        for (let joystick of this.arcade.Joysticks) {
+            joystick.update()
+        }
+        if (this.arcade.Joysticks[0]) {
+            this.setVelocityX(this.arcade.Joysticks[0].X * 400)
+            this.setVelocityY(this.arcade.Joysticks[0].Y * 400)
+        }
+    }
 
-    public update(): void {
-        if(this.y > 1000) {
-            console.log("ik ben buiten beeld jongens!")
-            this.scene.scene.start("EndScene")
-        }
-        if(this.scene.input.keyboard.checkDown(this.cursors.space, 500)){
-            this.handleFireButton()
-            console.log("Fire")
-        }
-        //GEDRAG
-        if (this.cursors.left.isDown || this.left == 1)  {
+    private keyboardInput(){
+         //GEDRAG
+         if (this.cursors.left.isDown || this.left == 1)  {
             this.setVelocityX(-300)
             this.flipX = true
             if(this.cursors.shift.isDown) {
@@ -59,6 +70,22 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.cursors.up.isDown && this.body.touching.down) {
             this.setVelocityY(-500)
         }
+    }
+
+
+    public update(): void {
+        this.joystickInput()
+        this.keyboardInput()
+
+        if(this.y > 1000) {
+            console.log("ik ben buiten beeld jongens!")
+            this.scene.scene.start("EndScene")
+        }
+        if(this.scene.input.keyboard.checkDown(this.cursors.space, 500)){
+            this.handleFireButton()
+            console.log("Fire")
+        }
+       
         
 
         //ANIMATIES
