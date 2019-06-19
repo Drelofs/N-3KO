@@ -1,6 +1,12 @@
 import { UI } from "./ui-scene"
+import { Arcade } from "../arcade/arcade"
+import { Neko } from "../app"
 
 export class StartScene extends Phaser.Scene {
+
+    private arcade : Arcade
+    private nextGameListener : EventListener
+    private collectibleListener : EventListener
 
     constructor() {
         super({key: "StartScene"})
@@ -13,6 +19,10 @@ export class StartScene extends Phaser.Scene {
     }
 
     create(): void {
+        let g = this.game as Neko
+        this.arcade = g.arcade
+
+
         this.add.image(0, 0, 'WASTELAND1').setOrigin(0, 0)
 
         // add another image here
@@ -37,7 +47,31 @@ export class StartScene extends Phaser.Scene {
         let btn2 = this.add.image(100, 100, 'trophy')
         btn2.setInteractive()
         btn2.on('pointerdown', (pointer) => {
-        this.scene.start('Collectibles')
+            this.scene.start('Collectibles')
         })
+
+        this.nextGameListener = () => this.nextGame()
+        document.addEventListener("joystick0button0", this.nextGameListener)
+
+        this.collectibleListener = () => this.showCollectibles()
+        document.addEventListener("joystick0button1", this.collectibleListener)
+
+        console.log("number of joysticks")
+        console.log(this.arcade.Joysticks)
+    }
+
+    private nextGame(){
+        document.removeEventListener("joystick0button0", this.nextGameListener)
+        this.scene.start('GameScene')
+    }
+
+    private showCollectibles(){
+        this.scene.start('Collectibles')
+    }
+
+    public update(){
+        for (let joystick of this.arcade.Joysticks) {
+            joystick.update()
+        }
     }
 }

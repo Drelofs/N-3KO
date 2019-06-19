@@ -1,7 +1,7 @@
 import { Player } from "../objects/player"
 import { enemy } from "../objects/bomb"
 import { Hill } from "../objects/hill"
-import { Arcade } from "../../arcade/arcade"
+import { Arcade } from "../arcade/arcade"
 
 
 

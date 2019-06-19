@@ -63,6 +63,7 @@ export class Joystick {
 
     public update(): void {
         let gamepad = navigator.getGamepads()[this.gamepad.index]
+        
         if (gamepad) { this.readGamepad(gamepad) }
     }
 

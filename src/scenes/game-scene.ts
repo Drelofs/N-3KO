@@ -1,6 +1,6 @@
 import { Player } from "../objects/player"
 import { enemy } from "../objects/bomb"
-import { Arcade } from "../../arcade/arcade"
+import { Arcade } from "../arcade/arcade"
 import { Bullet } from "../objects/bullet"
 import { Platform } from "../objects/platform"
 import { threadId } from "worker_threads";
@@ -185,6 +185,7 @@ export class GameScene extends Phaser.Scene {
         this.player.update()
         this.bgtile.tilePositionX += 1
 
+        /*
         for(let joystick of this.arcade.Joysticks){
             joystick.update()
             
@@ -198,6 +199,7 @@ export class GameScene extends Phaser.Scene {
             this.player.setVelocityX(joystick.X * 400)
             this.player.setVelocityY(joystick.Y * 400)
         }
+        */
     }
 
 }
