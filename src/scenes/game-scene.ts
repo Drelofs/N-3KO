@@ -1,11 +1,9 @@
 import { Player } from "../objects/player"
 import { enemy } from "../objects/bomb"
-import { Hill } from "../objects/hill"
 import { Arcade } from "../../arcade/arcade"
 import { Bullet } from "../objects/bullet"
 import { Platform } from "../objects/platform"
-
-
+import { threadId } from "worker_threads";
 
 export class GameScene extends Phaser.Scene {
 
@@ -16,7 +14,7 @@ export class GameScene extends Phaser.Scene {
     private platform: Phaser.GameObjects.Group
     private scraps: Phaser.Physics.Arcade.Group
     private bulletGroup: Phaser.GameObjects.Group
-    private collectedScraps = 0
+    // private collectedScraps : number = 0
     private scoreField
     private enemies: Phaser.GameObjects.Group
     private bgtile: Phaser.GameObjects.TileSprite
@@ -28,9 +26,15 @@ export class GameScene extends Phaser.Scene {
     private timer : Phaser.Time.TimerEvent
     private hitTimeout = false
 
+    
+    // public get CollectedScraps() : number {
+    //     return this.registry.values.scraps
+    // }
+    
+
     constructor() {
         super({ key: "GameScene" })
-
+        
         this.arcade = new Arcade()
         
         // The game must wait for de joysticks to connect
@@ -97,10 +101,10 @@ export class GameScene extends Phaser.Scene {
 
         
 
-        this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED',
-        { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+        // this.scoreField = this.add.text(200, 20,  + this.registry.values.scraps+ ' SCRAPS COLLECTED',
+        // { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
-        this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+        // this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platform)
@@ -120,6 +124,8 @@ export class GameScene extends Phaser.Scene {
         this.cameras.main.setBounds(0,0,1440 * 2,900) //game
         this.cameras.main.startFollow(this.player)
 
+        this.player.setCollideWorldBounds(true)
+
     }
 
     private setTimer() {
@@ -129,8 +135,6 @@ export class GameScene extends Phaser.Scene {
     private hitEnemy(player: Player, enemy: enemy, ) {
         if(this.hitTimeout == false) {
             this.registry.values.lives--
-            this.lives--
-            this.livesField.text = this.lives + ' Lives Left'
             this.hitTimeout = true
             this.timer = this.time.addEvent({
                 delay: 2000,
@@ -149,7 +153,7 @@ export class GameScene extends Phaser.Scene {
         
         // Game over. Reset scraps & Lives
         if (this.lives === 0) {
-            this.collectedScraps = 0;
+            this.registry.values.scraps = 0;
             this.scene.start("EndScene")
             this.lives = 9
         }
@@ -165,15 +169,16 @@ export class GameScene extends Phaser.Scene {
 
     private collectScraps(player : Player , scraps) : void {
         this.scraps.remove(scraps, true, true)
-        this.registry.values.score++
-        this.collectedScraps++
-
-        // TO DO check if we have all the stars, then go to the end scene
-        this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
+        // this.registry.values.score++
+        this.registry.values.scraps++
         
-        if(this.collectedScraps == 20){
+        
+        // TO DO check if we have all the stars, then go to the end scene
+        // this.scoreField.text = this.registry.values.scraps+ ' SCRAPS COLLECTED'
+        
+        if(this.registry.values.scraps == 20){
             this.scene.start('GameScene2')
-           this.collectedScraps = 0
+           this.registry.values.scraps = 0
         }
     }
     update(){
