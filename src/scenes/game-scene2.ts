@@ -113,7 +113,7 @@ export class GameScene2 extends Phaser.Scene {
 
     private collectScraps(player : Player , scrap) : void {
         this.scraps.remove(scrap, true, true)
-        this.registry.values.score++
+        // this.registry.values.score++
         this.collectedScraps++
 
         // TO DO check if we have all the scraps, then go to the end scene
