@@ -6,14 +6,15 @@ import { LoadingScene } from "./scenes/loading-scene"
 import { StartScene } from "./scenes/start-scene"
 import { GameScene } from "./scenes/game-scene"
 import { EndScene } from "./scenes/end-scene"
-//import { GameScene2 } from "./scenes/game-scene2"
+// import { GameScene2 } from "./scenes/game-scene2"
+import { Collectibles } from "./scenes/collectibles"
 
 const config: GameConfig = {
     width: 1440,
     height: 900,
     parent: "game",
     resolution: window.devicePixelRatio,
-    scene: [BootScene, LogoScene, UI, LoadingScene, StartScene, GameScene, EndScene],
+    scene: [BootScene, LogoScene, UI, LoadingScene, StartScene, GameScene, EndScene, Collectibles],
     input: {
         keyboard: true,
         gamepad: true
