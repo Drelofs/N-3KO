@@ -1,11 +1,8 @@
 import { Player } from "../objects/player"
 import { enemy } from "../objects/bomb"
-import { Hill } from "../objects/hill"
 import { Arcade } from "../../arcade/arcade"
 import { Bullet } from "../objects/bullet"
 import { Platform } from "../objects/platform"
-
-
 
 export class GameScene extends Phaser.Scene {
 
@@ -96,10 +93,10 @@ export class GameScene extends Phaser.Scene {
 
         
 
-        this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED',
-        { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+        // this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED',
+        // { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
-        this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+        // this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platform)
@@ -125,8 +122,6 @@ export class GameScene extends Phaser.Scene {
     private hitEnemy(player: Player, enemy: enemy, ) {
         if(this.hitTimeout == false) {
             this.registry.values.lives--
-            this.lives--
-            this.livesField.text = this.lives + ' Lives Left'
             this.hitTimeout = true
             this.timer = this.time.addEvent({
                 delay: 2000,
@@ -158,7 +153,7 @@ export class GameScene extends Phaser.Scene {
         this.collectedScraps++
 
         // TO DO check if we have all the stars, then go to the end scene
-        this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
+        // this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
         
         if(this.collectedScraps == 7){
             this.scene.start('GameScene2')
