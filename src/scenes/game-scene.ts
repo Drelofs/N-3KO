@@ -47,7 +47,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     init(): void {
-        console.log("dit is de gamescene")
+       
 
     }
 
@@ -94,12 +94,6 @@ export class GameScene extends Phaser.Scene {
         // this.physics.add.collider(this.player, hill)
         // this.hills.add(new Hill(this, 400, 900, 'HILL2'), true);
 
-        
-
-        this.scoreField = this.add.text(200, 20,  + this.collectedScraps+ ' SCRAPS COLLECTED',
-        { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
-
-        this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platform)
@@ -125,8 +119,6 @@ export class GameScene extends Phaser.Scene {
     private hitEnemy(player: Player, enemy: enemy, ) {
         if(this.hitTimeout == false) {
             this.registry.values.lives--
-            this.lives--
-            this.livesField.text = this.lives + ' Lives Left'
             this.hitTimeout = true
             this.timer = this.time.addEvent({
                 delay: 2000,
@@ -158,7 +150,7 @@ export class GameScene extends Phaser.Scene {
         this.collectedScraps++
 
         // TO DO check if we have all the stars, then go to the end scene
-        this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
+        // this.scoreField.text = this.collectedScraps+ ' SCRAPS COLLECTED'
         
         if(this.collectedScraps == 7){
             this.scene.start('GameScene2')

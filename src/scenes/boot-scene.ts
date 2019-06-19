@@ -89,7 +89,7 @@ export class BootScene extends Phaser.Scene {
 
         this.load.on('complete', () => {
             // let timer = this.time.delayedCall(2000, this.startGame, null, this);
-            this.scene.start("GameScene")
+            this.scene.start("StartScene")
         })
     }
 }

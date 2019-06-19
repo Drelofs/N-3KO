@@ -5,6 +5,7 @@ export class EndScene extends Phaser.Scene {
     }
 
     init(): void {
+        this.scene.remove("UIScene")
     }
 
     preload(): void {
