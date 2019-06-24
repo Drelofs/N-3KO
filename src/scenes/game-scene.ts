@@ -35,12 +35,23 @@ export class GameScene extends Phaser.Scene {
 
     constructor() {
         super({ key: "GameScene" })
+     
     }
 
     public friendlyBullet() {
         this.bulletGroup.add(new Bullet(this, this.player.x+20,  this.player.y, this.player.direction), true)
+        let config = {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay: 0
+        }
+        let laser = this.scene.scene.sound.add('laser', config);
+        laser.play();
         
-        console.log("Fire!")
     }
 
     init(): void {
@@ -55,6 +66,19 @@ export class GameScene extends Phaser.Scene {
 
         this.bulletGroup = this.add.group({ runChildUpdate: true})
 
+        let config = {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay: 0
+        }
+        let music = this.scene.scene.sound.add('meow', config);
+        music.play();
+        
+        
        
         // 11 SCRAPS
         this.scraps = this.physics.add.group({
@@ -166,6 +190,18 @@ export class GameScene extends Phaser.Scene {
         this.scraps.remove(scraps, true, true)
         // this.registry.values.score++
         this.registry.values.scraps++
+
+        let config = {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay: 0
+        }
+        let bell = this.scene.scene.sound.add('bell', config);
+        bell.play();
         
         
         // TO DO check if we have all the stars, then go to the end scene

@@ -15,7 +15,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
         
         this.setSize(this.displayWidth + 20, this.displayHeight + 20)
 
-        this.setVelocity((100 * direction),0)
+        this.setVelocity((200 * direction),0)
         this.setAccelerationX(400 * direction) 
         
         // this.on('destroy', this.onBeforeDestroy)

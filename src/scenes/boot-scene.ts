@@ -34,6 +34,8 @@ export class BootScene extends Phaser.Scene {
         this.load.image('WASTELAND1', require('../assets/WASTELAND1.jpg'))
         this.load.image('level_ice', require('../assets/level_ice.png'))
         this.load.image('pixels', require('../assets/pixelBackground.jpg'))
+        this.load.image('startscreen', require('../assets/Startscreen.jpg'))
+
 
         //HILLS
         this.load.image('HILL1', require('../assets/HILL_1.png'))
@@ -95,6 +97,11 @@ export class BootScene extends Phaser.Scene {
         //Lasers
         this.load.image('bullet', require('../assets/laser.png'))
         this.load.image('bullet1', require('../assets/laser1.png'))
+
+        //Sound
+        this.load.audio('meow', require ('../assets/audio/meow.mp3'))
+        this.load.audio('laser', require ('../assets/audio/laser.mp3'))
+        this.load.audio('bell', require ('../assets/audio/bell.mp3'))
         
 
         this.load.on('complete', () => {
