@@ -34,6 +34,8 @@ export class BootScene extends Phaser.Scene {
         this.load.image('WASTELAND1', require('../assets/WASTELAND1.jpg'))
         this.load.image('level_ice', require('../assets/level_ice.png'))
         this.load.image('pixels', require('../assets/pixelBackground.jpg'))
+        this.load.image('startscreen', require('../assets/Startscreen.jpg'))
+
 
         //HILLS
         this.load.image('HILL1', require('../assets/HILL_1.png'))

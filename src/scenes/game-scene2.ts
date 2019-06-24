@@ -6,7 +6,6 @@ import { MovingPlatform } from "../objects/movingplatform"
 export class GameScene2 extends Phaser.Scene {
 
     private player : Player
-    // private hills: Phaser.GameObjects.Group
     private platforms: Phaser.GameObjects.Group
     private scraps: Phaser.Physics.Arcade.Group
     private collectedScraps = 0
