@@ -8,6 +8,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private left = 0
     private GameScene : GameScene
     private arcade : Arcade
+    private facing:number = 1
 
     constructor(scene) {
         super(scene, 0, 500, "NEKO_IDLE1")
@@ -37,7 +38,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     private handleFireButton():void{
-        this.GameScene.friendlyBullet()
+        this.GameScene.friendlyBullet(this.facing)
     }
 
     private joystickInput():void {
@@ -56,12 +57,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
          if (this.cursors.left.isDown || this.left == 1)  {
             this.setVelocityX(-300)
             this.flipX = true
+            this.facing = -1
             if(this.cursors.shift.isDown) {
                 this.setVelocityX(-400)
             } 
         } else if (this.cursors.right.isDown) {
             this.setVelocityX(300)
             this.flipX = false
+            this.facing = 1
             if(this.cursors.shift.isDown) {
                 this.setVelocityX(400)
             }      
