@@ -94,6 +94,7 @@ export class BootScene extends Phaser.Scene {
 
         //Lasers
         this.load.image('bullet', require('../assets/laser.png'))
+        this.load.image('bullet1', require('../assets/laser1.png'))
         
 
         this.load.on('complete', () => {

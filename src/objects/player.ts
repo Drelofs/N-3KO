@@ -10,6 +10,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private arcade : Arcade
     private facing:number = 1
 
+    
+    public get direction() : number {
+        return this.facing
+    }
+    
+
     constructor(scene) {
         super(scene, 0, 500, "NEKO_IDLE1")
         this.GameScene = scene as GameScene
@@ -38,7 +44,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     private handleFireButton():void{
-        this.GameScene.friendlyBullet(this.facing)
+        this.GameScene.friendlyBullet()
     }
 
     private joystickInput():void {

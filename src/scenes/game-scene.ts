@@ -37,8 +37,9 @@ export class GameScene extends Phaser.Scene {
         super({ key: "GameScene" })
     }
 
-    public friendlyBullet(direction: number) {
-        this.bulletGroup.add(new Bullet(this, this.player.x+20,  this.player.y, direction), true)
+    public friendlyBullet() {
+        this.bulletGroup.add(new Bullet(this, this.player.x+20,  this.player.y, this.player.direction), true)
+        
         console.log("Fire!")
     }
 
