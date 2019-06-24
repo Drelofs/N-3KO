@@ -48,11 +48,26 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     private joystickInput():void {
-        console.log("reading joystick")
+        // console.log("reading joystick")
         for (let joystick of this.arcade.Joysticks) {
             joystick.update()
         }
         if (this.arcade.Joysticks[0]) {
+            if(this.arcade.Joysticks[0].Left){
+                this.setVelocityX(-300)
+                this.flipX = true
+                this.facing = -1
+
+            }
+            else if(this.arcade.Joysticks[0].Right){
+                this.setVelocityX(300)
+                this.flipX = false
+                this.facing = 1
+
+            }
+            if(this.arcade.Joysticks[0].Up && this.body.touching.down){
+                this.setVelocityY(-500)
+            }
             this.setVelocityX(this.arcade.Joysticks[0].X * 400)
             this.setVelocityY(this.arcade.Joysticks[0].Y * 400)
         }
@@ -100,7 +115,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         //ANIMATIES
         if (!this.body.touching.down) {
             this.play("JUMP", true)
-        } else if(this.cursors.left.isDown || this.cursors.right.isDown) {
+        } else if(this.cursors.left.isDown || this.cursors.right.isDown || (this.arcade.Joysticks[0] && (this.arcade.Joysticks[0].Left || this.arcade.Joysticks[0].Right))) {
             if (this.cursors.shift.isDown) {
                 this.play("RUN", true)
             } else {

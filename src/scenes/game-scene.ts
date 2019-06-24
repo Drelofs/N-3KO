@@ -68,7 +68,7 @@ export class GameScene extends Phaser.Scene {
 
         let config = {
             mute: false,
-            volume: 1,
+            volume: 20,
             rate: 1,
             detune: 0,
             seek: 0,
