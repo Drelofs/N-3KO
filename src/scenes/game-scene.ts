@@ -21,8 +21,8 @@ export class GameScene extends Phaser.Scene {
     private bgtile: Phaser.GameObjects.TileSprite
     // private bullet : Bullet
 
-    // private lives = 2
-    // private livesField
+    private lives = 2
+    private livesField
 
     private timer : Phaser.Time.TimerEvent
     private hitTimeout = false
@@ -94,10 +94,10 @@ export class GameScene extends Phaser.Scene {
 
         
 
-        // this.scoreField = this.add.text(200, 20,  + this.registry.values.scraps+ ' SCRAPS COLLECTED',
-        // { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+        this.scoreField = this.add.text(200, 20,  + this.registry.values.scraps+ ' SCRAPS COLLECTED',
+        { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
-        // this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+        this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platform)
@@ -105,7 +105,7 @@ export class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.enemies, this.platform)
         
         this.physics.add.overlap(this.player, this.scraps, this.collectScraps, null, this)
-        // this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this)
+        this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this)
 
 
         this.physics.add.overlap(this.bulletGroup, this.enemies, this.killEnemy, null, this)
@@ -125,6 +125,34 @@ export class GameScene extends Phaser.Scene {
         this.hitTimeout = false
     }
 
+    private hitEnemy(player: Player, enemy: enemy, ) {
+        if(this.hitTimeout == false) {
+            this.registry.values.lives--
+            this.lives--
+            this.livesField.text = this.lives + ' Lives Left'
+            this.hitTimeout = true
+            this.timer = this.time.addEvent({
+                delay: 2000,
+                callback: () => this.setTimer(),
+                repeat: 0,
+            })
+            this.add.tween({
+                targets: this.player,
+                ease: 'Sine.easeInOut',
+                duration: 200,
+                alpha: 0.4,
+                yoyo:true,
+                repeat:4
+            })
+        }
+        
+        // Game over. Reset scraps & Lives
+        if (this.lives === 0) {
+            this.registry.values.scraps = 0;
+            this.scene.start("EndScene")
+            this.lives = 9
+        }
+    }
 
     private killEnemy(bullet: Bullet, enemy : enemy) {
         console.log("enemy geraakt!")
