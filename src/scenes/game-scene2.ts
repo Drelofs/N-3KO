@@ -1,5 +1,6 @@
 import { Player } from "../objects/player"
 import { enemy } from "../objects/bomb"
+import { drone } from "../objects/drone"
 import { Arcade } from "../arcade/arcade"
 import { Bullet } from "../objects/bullet"
 import { Platform } from "../objects/platform"
@@ -17,6 +18,7 @@ export class GameScene2 extends Phaser.Scene {
     private bulletGroup: Phaser.GameObjects.Group
     private scoreField
     private enemies: Phaser.GameObjects.Group
+    private drone: Phaser.GameObjects.Group
     private bgtile: Phaser.GameObjects.TileSprite
     private lives = 2
     private livesField
@@ -81,7 +83,7 @@ export class GameScene2 extends Phaser.Scene {
 
         this.enemies = this.add.group()
         for (let i =0; i <2; i++){
-            this.enemies.add(new enemy(this, 650*i+250, 255), true)
+            this.enemies.add(new drone(this, 650*i+250, 255), true)
         }
 
         // TODO add player and enemy
@@ -97,8 +99,8 @@ export class GameScene2 extends Phaser.Scene {
         this.physics.add.collider(this.player, this.platform)
         this.platform.add(new Platform(this, 1200, 800, 'FLAT3'), true)
         this.platform.add(new Platform(this, 100, 800, 'MEDIUM1'), true)
-        this.platform.add(new Platform(this, 800, 400, 'AIR2'), true)
-        this.platform.add(new Platform(this, 100, 250, 'AIR4'), true)
+        this.platform.add(new Platform(this, 900, 400, 'AIR2'), true)
+        this.platform.add(new Platform(this, 200, 250, 'AIR4'), true)
         this.platform.add(new Platform(this, 1600, 250, 'AIR2'), true)
 
 
@@ -187,9 +189,9 @@ export class GameScene2 extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         // this.scoreField.text = this.registry.values.scraps+ ' SCRAPS COLLECTED'
         
-        if(this.registry.values.scraps == 25){
+        if(this.registry.values.scraps == 12){
             this.scene.start('GameScene3')
-        //    this.registry.values.scraps = 0
+           this.registry.values.scraps = 0
         }
     }
     update(){

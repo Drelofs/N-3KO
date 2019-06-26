@@ -181,9 +181,9 @@ export class GameScene3 extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         // this.scoreField.text = this.registry.values.scraps+ ' SCRAPS COLLECTED'
         
-        if(this.registry.values.scraps == 42){
+        if(this.registry.values.scraps == 12){
             this.scene.start('GameScene2')
-        //    this.registry.values.scraps = 0
+           this.registry.values.scraps = 0
         }
     }
     update(){
