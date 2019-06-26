@@ -75,12 +75,12 @@ export class GameScene extends Phaser.Scene {
         this.scraps = this.physics.add.group({
             key: 'scrap',
             repeat: 12,
-            setXY: { x: 12, y: 30, stepX: 70 },
+            setXY: { x: 12, y: 30, stepX: 150 },
         })
 
         this.enemies = this.add.group()
         for (let i =0; i <4; i++){
-            this.enemies.add(new enemy(this, 250*i+250, 255), true)
+            this.enemies.add(new enemy(this, 600*i+250, 255), true)
         }
 
         // TODO add player and enemy
@@ -93,10 +93,12 @@ export class GameScene extends Phaser.Scene {
 
         //PLATFORM
         this.physics.add.collider(this.player, this.platform)
-        this.platform.add(new Platform(this, 300, 800, 'FLAT1'), true)
-        this.platform.add(new Platform(this, 900, 800, 'MEDIUM1'), true)
-        this.platform.add(new Platform(this, 400, 400, 'AIR1'), true)
-        this.platform.add(new Platform(this, 1300, 250, 'AIR2'), true)
+        this.platform.add(new Platform(this, 200, 800, 'FLAT1'), true)
+        this.platform.add(new Platform(this, 1100, 800, 'MEDIUM2'), true)
+        this.platform.add(new Platform(this, 1800, 800, 'MEDIUM2'), true)
+        this.platform.add(new Platform(this, 600, 200, 'AIR2'), true)
+        this.platform.add(new Platform(this, 100, 500, 'AIR4'), true)
+        this.platform.add(new Platform(this, 1600, 350, 'AIR2'), true)
 
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platform)
@@ -113,7 +115,7 @@ export class GameScene extends Phaser.Scene {
         this.cameras.main.setBounds(0,0,1800,900) //game
         this.cameras.main.startFollow(this.player)
 
-        this.player.setCollideWorldBounds(true)
+        this.player.setCollideWorldBounds(false)
 
     }
 
@@ -175,10 +177,7 @@ export class GameScene extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         if(this.registry.values.scraps == 12){
             this.scene.start('GameScene2')
-<<<<<<< HEAD
-=======
            
->>>>>>> de7b27b7133dd2733606ce44c5f695a26a0738a0
         }
     }
     update(){

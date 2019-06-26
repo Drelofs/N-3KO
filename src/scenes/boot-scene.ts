@@ -106,7 +106,7 @@ export class BootScene extends Phaser.Scene {
         this.load.audio('bell', require ('../assets/audio/bell.mp3'))
         
         this.load.on('complete', () => {
-            this.scene.start("StartScene")
+            this.scene.start("LogoScene")
         })
     }
 }

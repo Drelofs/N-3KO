@@ -51,7 +51,7 @@ export class UI extends Phaser.Scene {
     }
 
     update(){
-       this.scoreField.text =  this.registry.values.scraps + ' SCRAPS COLLECTED'
+        this.scoreField.text =  this.registry.values.scraps + ' SCRAPS COLLECTED'
         if(this.registry.values.scraps === 9){
             this.roboAnimal.collected = true,
             this.add.image(1150, 600, 'raTurtle').setOrigin(0, 0) ;

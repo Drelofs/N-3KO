@@ -111,7 +111,7 @@ export class GameScene2 extends Phaser.Scene {
         this.cameras.main.setBounds(0,0,1800,900) //game
         this.cameras.main.startFollow(this.player)
 
-        this.player.setCollideWorldBounds(true)
+        this.player.setCollideWorldBounds(false)
 
     }
 
