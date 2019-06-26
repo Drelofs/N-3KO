@@ -76,12 +76,12 @@ export class GameScene2 extends Phaser.Scene {
         this.scraps = this.physics.add.group({
             key: 'scrap',
             repeat: 12,
-            setXY: { x: 12, y: 30, stepX: 70 },
+            setXY: { x: 150, y: 30, stepX: 100 },
         })
 
         this.enemies = this.add.group()
-        for (let i =0; i <4; i++){
-            this.enemies.add(new enemy(this, 250*i+250, 255), true)
+        for (let i =0; i <2; i++){
+            this.enemies.add(new enemy(this, 650*i+250, 255), true)
         }
 
         // TODO add player and enemy
@@ -95,10 +95,11 @@ export class GameScene2 extends Phaser.Scene {
         //PLATFORM  
         // const platform : Platform = (this.platform.children.entries[0]) as Platform
         this.physics.add.collider(this.player, this.platform)
-        this.platform.add(new Platform(this, 300, 800, 'FLAT1'), true)
-        this.platform.add(new Platform(this, 900, 800, 'MEDIUM1'), true)
-        this.platform.add(new Platform(this, 400, 400, 'AIR1'), true)
-        this.platform.add(new Platform(this, 1300, 250, 'AIR2'), true)
+        this.platform.add(new Platform(this, 1200, 800, 'FLAT3'), true)
+        this.platform.add(new Platform(this, 100, 800, 'MEDIUM1'), true)
+        this.platform.add(new Platform(this, 900, 400, 'AIR2'), true)
+        this.platform.add(new Platform(this, 200, 250, 'AIR4'), true)
+
 
 
         this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
@@ -149,7 +150,7 @@ export class GameScene2 extends Phaser.Scene {
                 repeat:4
             })
         }
-        
+    
         // Game over. Reset scraps & Lives
         if (this.lives === 0) {
             this.registry.values.scraps = 0;
