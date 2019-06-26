@@ -58,6 +58,9 @@ export class StartScene extends Phaser.Scene {
     private nextGame(){
         document.removeEventListener("joystick0button0", this.nextGameListener)
         this.scene.start('GameScene')
+        this.scene.add("UIScene", new UI ("UIScene"), true)
+        this.registry.set("scraps", 0)
+        this.registry.set("lives", 2)
     }
 
     private showCollectibles(){
