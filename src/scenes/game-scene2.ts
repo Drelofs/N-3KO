@@ -99,6 +99,7 @@ export class GameScene2 extends Phaser.Scene {
         this.platform.add(new Platform(this, 100, 800, 'MEDIUM1'), true)
         this.platform.add(new Platform(this, 900, 400, 'AIR2'), true)
         this.platform.add(new Platform(this, 200, 250, 'AIR4'), true)
+        this.platform.add(new Platform(this, 1600, 250, 'AIR2'), true)
 
 
 
@@ -187,7 +188,7 @@ export class GameScene2 extends Phaser.Scene {
         // this.scoreField.text = this.registry.values.scraps+ ' SCRAPS COLLECTED'
         
         if(this.registry.values.scraps == 12){
-            this.scene.start('GameScene2')
+            this.scene.start('GameScene3')
            this.registry.values.scraps = 0
         }
     }

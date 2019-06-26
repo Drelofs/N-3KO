@@ -7,6 +7,7 @@ import { UI } from "./scenes/ui-scene"
 import { GameScene } from "./scenes/game-scene"
 import { EndScene } from "./scenes/end-scene"
 import { GameScene2 } from "./scenes/game-scene2"
+import { GameScene3 } from "./scenes/game-scene3"
 import { Collectibles } from "./scenes/collectibles"
 import { Arcade } from "./arcade/arcade"
 
@@ -15,7 +16,7 @@ const config: GameConfig = {
     height: 900,
     parent: "game",
     resolution: window.devicePixelRatio,
-    scene: [BootScene, LogoScene, LoadingScene, UI, StartScene, GameScene, EndScene, GameScene2, Collectibles],
+    scene: [BootScene, LogoScene, LoadingScene, UI, StartScene, GameScene, EndScene, GameScene2, GameScene3, Collectibles],
     input: {
         keyboard: true,
         gamepad: true
