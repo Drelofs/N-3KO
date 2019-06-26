@@ -29,6 +29,7 @@ export class EndScene extends Phaser.Scene {
             this.scene.add("UIScene", new UI ("UIScene"), true)
 
             this.registry.set("scraps", 0)
+            this.registry.set("lives", 2)
 
             this.scene.start('GameScene')
         })

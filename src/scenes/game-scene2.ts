@@ -102,7 +102,7 @@ export class GameScene2 extends Phaser.Scene {
 
 
 
-        this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+        // this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platform)
@@ -133,8 +133,6 @@ export class GameScene2 extends Phaser.Scene {
     private hitEnemy(player: Player, enemy: enemy, ) {
         if(this.hitTimeout == false) {
             this.registry.values.lives--
-            this.lives--
-            this.livesField.text = this.lives + ' Lives Left'
             this.hitTimeout = true
             this.timer = this.time.addEvent({
                 delay: 2000,
@@ -152,7 +150,7 @@ export class GameScene2 extends Phaser.Scene {
         }
     
         // Game over. Reset scraps & Lives
-        if (this.lives === 0) {
+        if (this.registry.values.lives === 0) {
             this.registry.values.scraps = 0;
             this.scene.start("EndScene")
             this.lives = 2

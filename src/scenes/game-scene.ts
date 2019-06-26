@@ -149,10 +149,9 @@ export class GameScene extends Phaser.Scene {
         }
         
         // Game over. Reset scraps & Lives
-        if (this.lives === 0) {
-            this.registry.values.scraps = 0;
+        if (this.registry.values.lives === 0) {
+            this.registry.values.lives = 0;
             this.scene.start("EndScene")
-            this.lives = 2
         }
     }
 

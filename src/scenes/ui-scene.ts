@@ -64,5 +64,6 @@ export class UI extends Phaser.Scene {
         this.livesField.text = this.registry.values.lives + ' LIVES LEFT'
     }
 
+
     
 }
