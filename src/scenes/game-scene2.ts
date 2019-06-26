@@ -99,10 +99,11 @@ export class GameScene2 extends Phaser.Scene {
         this.platform.add(new Platform(this, 100, 800, 'MEDIUM1'), true)
         this.platform.add(new Platform(this, 900, 400, 'AIR2'), true)
         this.platform.add(new Platform(this, 200, 250, 'AIR4'), true)
+        this.platform.add(new Platform(this, 1600, 250, 'AIR2'), true)
 
 
 
-        this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
+        // this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
 
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platform)
@@ -133,8 +134,6 @@ export class GameScene2 extends Phaser.Scene {
     private hitEnemy(player: Player, enemy: enemy, ) {
         if(this.hitTimeout == false) {
             this.registry.values.lives--
-            this.lives--
-            this.livesField.text = this.lives + ' Lives Left'
             this.hitTimeout = true
             this.timer = this.time.addEvent({
                 delay: 2000,
@@ -152,7 +151,7 @@ export class GameScene2 extends Phaser.Scene {
         }
     
         // Game over. Reset scraps & Lives
-        if (this.lives === 0) {
+        if (this.registry.values.lives === 0) {
             this.registry.values.scraps = 0;
             this.scene.start("EndScene")
             this.lives = 2
@@ -189,7 +188,7 @@ export class GameScene2 extends Phaser.Scene {
         // this.scoreField.text = this.registry.values.scraps+ ' SCRAPS COLLECTED'
         
         if(this.registry.values.scraps == 12){
-            this.scene.start('GameScene2')
+            this.scene.start('GameScene3')
            this.registry.values.scraps = 0
         }
     }
