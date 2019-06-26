@@ -185,7 +185,7 @@ export class GameScene extends Phaser.Scene {
         
         if(this.registry.values.scraps == 12){
             this.scene.start('GameScene2')
-           this.registry.values.scraps = 0
+           
         }
     }
     update(){

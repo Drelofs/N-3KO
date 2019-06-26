@@ -96,7 +96,7 @@ export class GameScene3 extends Phaser.Scene {
         // const platform : Platform = (this.platform.children.entries[0]) as Platform
         this.physics.add.collider(this.player, this.platform)
         this.platform.add(new Platform(this, 100, 800, 'FLAT1'), true)
-        this.platform.add(new Platform(this, 1000, 800, 'MEDIUM1'), true)
+        this.platform.add(new Platform(this, 1200, 800, 'MEDIUM1'), true)
         this.platform.add(new Platform(this, 200, 250, 'AIR4'), true)
 
         // define collisions for bouncing, and overlaps for pickups
@@ -181,9 +181,8 @@ export class GameScene3 extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         // this.scoreField.text = this.registry.values.scraps+ ' SCRAPS COLLECTED'
         
-        if(this.registry.values.scraps == 12){
+        if(this.registry.values.scraps == 42){
             this.scene.start('GameScene2')
-           this.registry.values.scraps = 0
         }
     }
     update(){

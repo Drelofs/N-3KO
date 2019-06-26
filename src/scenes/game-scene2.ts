@@ -100,8 +100,8 @@ export class GameScene2 extends Phaser.Scene {
         this.platform.add(new Platform(this, 1200, 800, 'FLAT3'), true)
         this.platform.add(new Platform(this, 100, 800, 'MEDIUM1'), true)
         this.platform.add(new Platform(this, 900, 400, 'AIR2'), true)
-        this.platform.add(new Platform(this, 200, 250, 'AIR4'), true)
-        this.platform.add(new Platform(this, 1600, 250, 'AIR2'), true)
+        this.platform.add(new Platform(this, 150, 250, 'AIR4'), true)
+        this.platform.add(new Platform(this, 1500, 250, 'AIR2'), true)
 
 
 
@@ -156,8 +156,7 @@ export class GameScene2 extends Phaser.Scene {
         if (this.registry.values.lives === 0) {
             this.registry.values.scraps = 0;
             this.scene.start("EndScene")
-            this.lives = 2
-        }
+            this.lives = 3
     }
 
     private killEnemy(bullet: Bullet, enemy : enemy) {
@@ -189,9 +188,9 @@ export class GameScene2 extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         // this.scoreField.text = this.registry.values.scraps+ ' SCRAPS COLLECTED'
         
-        if(this.registry.values.scraps == 12){
+        if(this.registry.values.scraps == 25){
             this.scene.start('GameScene3')
-           this.registry.values.scraps = 0
+        //    this.registry.values.scraps = 0
         }
     }
     update(){
