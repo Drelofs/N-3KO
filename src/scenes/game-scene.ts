@@ -27,12 +27,6 @@ export class GameScene extends Phaser.Scene {
     private timer : Phaser.Time.TimerEvent
     private hitTimeout = false
 
-    
-    // public get CollectedScraps() : number {
-    //     return this.registry.values.scraps
-    // }
-    
-
     constructor() {
         super({ key: "GameScene" })
      
@@ -109,20 +103,6 @@ export class GameScene extends Phaser.Scene {
         this.platform.add(new Platform(this, 1300, 250, 'AIR2'), true)
 
 
-
-        // //HILL1
-        // const hill : Hill = (this.hills.children.entries[0]) as Hill
-
-        // this.physics.add.collider(this.player, hill)
-        // this.hills.add(new Hill(this, 400, 900, 'HILL2'), true);
-
-        
-
-        // this.scoreField = this.add.text(200, 20,  + this.registry.values.scraps+ ' SCRAPS COLLECTED',
-        // { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
-
-        this.livesField = this.add.text(1340, 20,  + this.lives+ ' LIVES LEFT', { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
-
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platform)
         this.physics.add.collider(this.player, this.platform)
@@ -152,8 +132,6 @@ export class GameScene extends Phaser.Scene {
     private hitEnemy(player: Player, enemy: enemy, ) {
         if(this.hitTimeout == false) {
             this.registry.values.lives--
-            this.lives--
-            this.livesField.text = this.lives + ' Lives Left'
             this.hitTimeout = true
             this.timer = this.time.addEvent({
                 delay: 2000,
@@ -188,7 +166,6 @@ export class GameScene extends Phaser.Scene {
 
     private collectScraps(player : Player , scraps) : void {
         this.scraps.remove(scraps, true, true)
-        // this.registry.values.score++
         this.registry.values.scraps++
 
         let config = {
@@ -214,8 +191,6 @@ export class GameScene extends Phaser.Scene {
     }
     update(){
         this.player.update()
-        // this.bgtile.tilePositionX += 1
-
     }
 
 }
