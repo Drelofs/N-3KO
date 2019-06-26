@@ -179,9 +179,6 @@ export class GameScene extends Phaser.Scene {
     }
 
     private killEnemy(bullet: Bullet, enemy : enemy) {
-        console.log("enemy geraakt!")
-        console.log(bullet)
-        console.log(enemy)
         this.enemies.remove(enemy, true, true)
     }
 
@@ -190,6 +187,7 @@ export class GameScene extends Phaser.Scene {
         this.scraps.remove(scraps, true, true)
         // this.registry.values.score++
         this.registry.values.scraps++
+        console.log(this.registry.values.scraps)
 
         let config = {
             mute: false,
