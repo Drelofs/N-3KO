@@ -27,6 +27,8 @@ export class BootScene extends Phaser.Scene {
         this.load.image('backArrow', require('../assets/backArrow.png'))   
         this.load.image('ground', require('../assets/ground.jpg'))
 
+        this.load.image('drone', require('../assets/drone.png'))
+
         //BACKGROUNDS
         this.load.image('sky', require('../assets/background.png'))
         this.load.image('WASTELAND1', require('../assets/WASTELAND1.jpg'))

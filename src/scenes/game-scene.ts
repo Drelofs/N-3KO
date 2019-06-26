@@ -19,7 +19,7 @@ export class GameScene extends Phaser.Scene {
     private enemies: Phaser.GameObjects.Group
     private bgtile: Phaser.GameObjects.TileSprite
 
-    private lives = 3
+    private lives = 2
     private livesField
     private timer : Phaser.Time.TimerEvent
     private hitTimeout = false
@@ -75,7 +75,7 @@ export class GameScene extends Phaser.Scene {
         this.scraps = this.physics.add.group({
             key: 'scrap',
             repeat: 12,
-            setXY: { x: 12, y: 30, stepX: 100 },
+            setXY: { x: 12, y: 30, stepX: 70 },
         })
 
         this.enemies = this.add.group()
@@ -148,6 +148,9 @@ export class GameScene extends Phaser.Scene {
     }
 
     private killEnemy(bullet: Bullet, enemy : enemy) {
+        console.log("enemy geraakt!")
+        console.log(bullet)
+        console.log(enemy)
         this.enemies.remove(enemy, true, true)
     }
 
@@ -155,7 +158,6 @@ export class GameScene extends Phaser.Scene {
     private collectScraps(player : Player , scraps) : void {
         this.scraps.remove(scraps, true, true)
         this.registry.values.scraps++
-        console.log(this.registry.values.scraps)
 
         let config = {
             mute: false,
@@ -173,6 +175,10 @@ export class GameScene extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         if(this.registry.values.scraps == 12){
             this.scene.start('GameScene2')
+<<<<<<< HEAD
+=======
+           
+>>>>>>> de7b27b7133dd2733606ce44c5f695a26a0738a0
         }
     }
     update(){

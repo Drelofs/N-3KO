@@ -89,9 +89,8 @@ export class GameScene3 extends Phaser.Scene {
 
         //PLATFORM  
         this.physics.add.collider(this.player, this.platform)
-        this.platform.add(new Platform(this, 1200, 800, 'FLAT3'), true)
-        this.platform.add(new Platform(this, 100, 800, 'MEDIUM2'), true)
-        this.platform.add(new Platform(this, 900, 400, 'AIR2'), true)
+        this.platform.add(new Platform(this, 100, 800, 'FLAT1'), true)
+        this.platform.add(new Platform(this, 1200, 800, 'MEDIUM1'), true)
         this.platform.add(new Platform(this, 200, 250, 'AIR4'), true)
 
         // define collisions for bouncing, and overlaps for pickups

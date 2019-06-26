@@ -52,25 +52,21 @@ export class UI extends Phaser.Scene {
 
     update(){
        this.scoreField.text =  this.registry.values.scraps + ' SCRAPS COLLECTED'
-        if(this.registry.values.scraps === 6){
+        if(this.registry.values.scraps === 9){
             this.roboAnimal.collected = true,
             this.add.image(1150, 600, 'raTurtle').setOrigin(0, 0) ;
-        } else if (this.registry.values.scraps === 12){
-                this.roboAnimal.collected = false,
-                this.add.image(1150, 600, 'raGorilla').setOrigin(0, 0) ;
-        } else if (this.registry.values.scraps === 20){
-            this.roboAnimal.collected = false,
-            this.add.image(1150, 600, 'raFox').setOrigin(0, 0) ;
-        } else if (this.registry.values.scraps === 26){
-            this.roboAnimal.collected = false,
-            this.add.image(1150, 600, 'raGiraffe').setOrigin(0, 0) ;
-        } else if (this.registry.values.scraps === 31){
-            this.roboAnimal.collected = false,
-            this.add.image(1150, 600, 'raHippo').setOrigin(0, 0) ;
-        } else if (this.registry.values.scraps === 36){
-            this.roboAnimal.collected = false,
-            this.add.image(1150, 600, 'raElephant').setOrigin(0, 0) ;
-    }
+            } else if (this.registry.values.scraps === 12) {
+                this.roboAnimal.collected = true, this.add.image(1150, 600, 'raGorilla').setOrigin(0, 0);
+            } else if (this.registry.values.scraps === 18) {
+                this.roboAnimal.collected = false, this.add.image(1150, 600, 'raFox').setOrigin(0, 0);
+            } else if (this.registry.values.scraps === 23) {
+                this.roboAnimal.collected = false, this.add.image(1150, 600, 'raHippo').setOrigin(0, 0);
+            } else if (this.registry.values.scraps === 29) {
+                this.roboAnimal.collected = false, this.add.image(1150, 600, 'raGiraffe').setOrigin(0, 0);
+            } else if (this.registry.values.scraps === 35) {
+                this.roboAnimal.collected = false, this.add.image(1150, 600, 'raElephant').setOrigin(0, 0);
+            }
+    //    this.livesField.text = 'Lives : ' + this.registry.values.lives
         this.livesField.text = this.registry.values.lives + ' LIVES LEFT'
     }
 
