@@ -2,6 +2,8 @@ import { UI } from "./ui-scene"
 
 export class EndScene extends Phaser.Scene {
 
+    private GameListener : EventListener
+
     constructor() {
         super({key: "EndScene"})
     }
@@ -30,6 +32,17 @@ export class EndScene extends Phaser.Scene {
             this.registry.set("scraps", 0)
             this.registry.set("lives", 2)
             this.scene.start('GameScene')
+            
         })
     }
+    private nextGame(){
+        document.removeEventListener("joystick0button0", this.GameListener)
+        this.scene.start('GameScene')
+        this.scene.add("UIScene", new UI ("UIScene"), true)
+
+        this.registry.set("scraps", 0)
+        this.registry.set("lives", 3)
+
+    }
+
 }
