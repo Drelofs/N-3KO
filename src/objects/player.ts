@@ -59,8 +59,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             if(this.arcade.Joysticks[0].Up && this.body.touching.down){
                 this.setVelocityY(-500)
             }
-            this.setVelocityX(this.arcade.Joysticks[0].X * 400)
-            this.setVelocityY(this.arcade.Joysticks[0].Y * 400)
+            // this.setVelocityX(this.arcade.Joysticks[0].X * 400)
+            // this.setVelocityY(this.arcade.Joysticks[0].Y * 400)
         }
     }
 
