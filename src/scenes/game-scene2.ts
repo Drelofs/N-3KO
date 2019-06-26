@@ -53,7 +53,7 @@ export class GameScene2 extends Phaser.Scene {
     }
 
     create(): void {
-        this.bgtile = this.add.tileSprite(0, 0, 1800, 900, 'WASTELAND1')
+        this.bgtile = this.add.tileSprite(0, 0, 1800, 900, 'level_ice')
         this.bgtile.setOrigin(0,0)
 
         this.bulletGroup = this.add.group({ runChildUpdate: true})

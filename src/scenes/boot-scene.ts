@@ -35,6 +35,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image('level_ice', require('../assets/level_ice.png'))
         this.load.image('pixels', require('../assets/pixelBackground.jpg'))
         this.load.image('startscreen', require('../assets/Startscreen1.jpg'))
+        this.load.image('gameover', require('../assets/gameOver.jpg'))
 
 
         //HILLS
