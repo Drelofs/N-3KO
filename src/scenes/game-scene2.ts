@@ -1,5 +1,6 @@
 import { Player } from "../objects/player"
 import { enemy } from "../objects/bomb"
+import { drone } from "../objects/drone"
 import { Arcade } from "../arcade/arcade"
 import { Bullet } from "../objects/bullet"
 import { Platform } from "../objects/platform"
@@ -17,6 +18,7 @@ export class GameScene2 extends Phaser.Scene {
     private bulletGroup: Phaser.GameObjects.Group
     private scoreField
     private enemies: Phaser.GameObjects.Group
+    private drone: Phaser.GameObjects.Group
     private bgtile: Phaser.GameObjects.TileSprite
     private lives = 2
     private livesField
@@ -81,7 +83,7 @@ export class GameScene2 extends Phaser.Scene {
 
         this.enemies = this.add.group()
         for (let i =0; i <2; i++){
-            this.enemies.add(new enemy(this, 650*i+250, 255), true)
+            this.enemies.add(new drone(this, 650*i+250, 255), true)
         }
 
         // TODO add player and enemy
