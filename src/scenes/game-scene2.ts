@@ -97,8 +97,8 @@ export class GameScene2 extends Phaser.Scene {
         this.physics.add.collider(this.player, this.platform)
         this.platform.add(new Platform(this, 1200, 800, 'FLAT3'), true)
         this.platform.add(new Platform(this, 100, 800, 'MEDIUM1'), true)
-        this.platform.add(new Platform(this, 900, 400, 'AIR2'), true)
-        this.platform.add(new Platform(this, 200, 250, 'AIR4'), true)
+        this.platform.add(new Platform(this, 800, 400, 'AIR2'), true)
+        this.platform.add(new Platform(this, 100, 250, 'AIR4'), true)
         this.platform.add(new Platform(this, 1600, 250, 'AIR2'), true)
 
 
@@ -187,9 +187,9 @@ export class GameScene2 extends Phaser.Scene {
         // TO DO check if we have all the stars, then go to the end scene
         // this.scoreField.text = this.registry.values.scraps+ ' SCRAPS COLLECTED'
         
-        if(this.registry.values.scraps == 12){
+        if(this.registry.values.scraps == 25){
             this.scene.start('GameScene3')
-           this.registry.values.scraps = 0
+        //    this.registry.values.scraps = 0
         }
     }
     update(){
