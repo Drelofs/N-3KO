@@ -95,7 +95,7 @@ export class GameScene3 extends Phaser.Scene {
         //PLATFORM  
         // const platform : Platform = (this.platform.children.entries[0]) as Platform
         this.physics.add.collider(this.player, this.platform)
-        this.platform.add(new Platform(this, 100, 800, 'FLAT'), true)
+        this.platform.add(new Platform(this, 100, 800, 'FLAT1'), true)
         this.platform.add(new Platform(this, 1000, 800, 'MEDIUM1'), true)
         this.platform.add(new Platform(this, 200, 250, 'AIR4'), true)
 
