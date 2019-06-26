@@ -76,12 +76,12 @@ export class GameScene3 extends Phaser.Scene {
         this.scraps = this.physics.add.group({
             key: 'scrap',
             repeat: 12,
-            setXY: { x: 150, y: 30, stepX: 100 },
+            setXY: { x: 150, y: 30, stepX: 180 },
         })
 
         this.enemies = this.add.group()
-        for (let i =0; i <2; i++){
-            this.enemies.add(new enemy(this, 650*i+250, 255), true)
+        for (let i =0; i <3; i++){
+            this.enemies.add(new enemy(this, 700*i+250, 255), true)
         }
 
         // TODO add player and enemy
@@ -96,8 +96,9 @@ export class GameScene3 extends Phaser.Scene {
         // const platform : Platform = (this.platform.children.entries[0]) as Platform
         this.physics.add.collider(this.player, this.platform)
         this.platform.add(new Platform(this, 100, 800, 'FLAT1'), true)
-        this.platform.add(new Platform(this, 1200, 800, 'MEDIUM1'), true)
-        this.platform.add(new Platform(this, 200, 250, 'AIR4'), true)
+        this.platform.add(new Platform(this, 1400, 800, 'MEDIUM1'), true)
+        this.platform.add(new Platform(this, 700, 450, 'AIR2'), true)
+        this.platform.add(new Platform(this, 1800, 250, 'AIR3'), true)
 
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platform)
