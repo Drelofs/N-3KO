@@ -17,11 +17,8 @@ export class UI extends Phaser.Scene {
     private timer : Phaser.Time.TimerEvent
     private hitTimeout = false
 
-
-    
     constructor(key:string) {
         super(key)
-
     }
 
 
@@ -34,7 +31,6 @@ export class UI extends Phaser.Scene {
             { fontFamily: 'Arial Black', fontSize: 20, color: '#000000' }).setOrigin(0.5).setStroke('#FFFFFF', 2)
        
         this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this)
-        
     }
 
     private setTimer() {
@@ -74,8 +70,7 @@ export class UI extends Phaser.Scene {
         } else if (this.registry.values.scraps === 36){
             this.roboAnimal.collected = false,
             this.add.image(1150, 600, 'raElephant').setOrigin(0, 0) ;
-    } 
-    //    this.livesField.text = 'Lives : ' + this.registry.values.lives
+    }
         this.livesField.text = this.registry.values.lives + ' LIVES LEFT'
     }
 

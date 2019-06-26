@@ -12,7 +12,6 @@ export class BootScene extends Phaser.Scene {
     init(){
     }
 
-
     preload(): void {
         
         this.load.image('logo', require('../assets/SenpaiGames.png'))
@@ -25,8 +24,7 @@ export class BootScene extends Phaser.Scene {
         this.load.image('start', require('../assets/start.png'))
         this.load.image('trophy', require('../assets/trophy.png'))
         this.load.image('cat', require('../assets/kittycat.png'))
-        this.load.image('backArrow', require('../assets/backArrow.png'))
-        
+        this.load.image('backArrow', require('../assets/backArrow.png'))   
         this.load.image('ground', require('../assets/ground.jpg'))
 
         //BACKGROUNDS
@@ -37,8 +35,6 @@ export class BootScene extends Phaser.Scene {
         this.load.image('startscreen', require('../assets/Startscreen1.jpg'))
         this.load.image('gameover', require('../assets/gameOver.jpg'))
         this.load.image('BACKGROUND3', require('../assets/background3.jpg'))
-
-
 
         //HILLS
         this.load.image('HILL1', require('../assets/HILL_1.png'))
@@ -68,7 +64,6 @@ export class BootScene extends Phaser.Scene {
 
         // Enemies
         this.load.image('enemy', require('../assets/ghoul.png'))
-        
         
         // N-3KO Sprites
         //Idle sprites
@@ -108,9 +103,7 @@ export class BootScene extends Phaser.Scene {
         this.load.audio('laser', require ('../assets/audio/laser.mp3'))
         this.load.audio('bell', require ('../assets/audio/bell.mp3'))
         
-
         this.load.on('complete', () => {
-            // let timer = this.time.delayedCall(2000, this.startGame, null, this);
             this.scene.start("StartScene")
         })
     }

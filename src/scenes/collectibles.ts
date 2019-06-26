@@ -26,13 +26,10 @@ export class Collectibles extends Phaser.Scene {
     constructor() {
         super({ key: "Collectibles" })
 
-        this.arcade = new Arcade()
-        
+        this.arcade = new Arcade() 
     }
 
     init(): void {
-        console.log("dit is de Collectiblescene")
-
     }
 
     create(): void {
@@ -56,7 +53,6 @@ export class Collectibles extends Phaser.Scene {
         })
     }
 
-   
     update(){
 
         for(let joystick of this.arcade.Joysticks){

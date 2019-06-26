@@ -28,7 +28,7 @@ const config: GameConfig = {
             gravity: { y: 400 }
         }
     },
-    render: { pixelArt: true } //!
+    render: { pixelArt: true }
 };
 
 export class Neko extends Phaser.Game {

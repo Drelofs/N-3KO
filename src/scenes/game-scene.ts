@@ -15,15 +15,12 @@ export class GameScene extends Phaser.Scene {
     private platform: Phaser.GameObjects.Group
     private scraps: Phaser.Physics.Arcade.Group
     private bulletGroup: Phaser.GameObjects.Group
-    // private collectedScraps : number = 0
     private scoreField
     private enemies: Phaser.GameObjects.Group
     private bgtile: Phaser.GameObjects.TileSprite
-    // private bullet : Bullet
 
     private lives = 3
     private livesField
-
     private timer : Phaser.Time.TimerEvent
     private hitTimeout = false
 
@@ -94,14 +91,12 @@ export class GameScene extends Phaser.Scene {
         this.platform = this.add.group({ runChildUpdate: true})
         this.hills = this.add.group({ runChildUpdate: true })
 
-        //PLATFORM  
-        // const platform : Platform = (this.platform.children.entries[0]) as Platform
+        //PLATFORM
         this.physics.add.collider(this.player, this.platform)
         this.platform.add(new Platform(this, 300, 800, 'FLAT1'), true)
         this.platform.add(new Platform(this, 900, 800, 'MEDIUM1'), true)
         this.platform.add(new Platform(this, 400, 400, 'AIR1'), true)
         this.platform.add(new Platform(this, 1300, 250, 'AIR2'), true)
-
 
         // define collisions for bouncing, and overlaps for pickups
         this.physics.add.collider(this.scraps, this.platform)
@@ -111,13 +106,10 @@ export class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.scraps, this.collectScraps, null, this)
         this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this)
 
-
         this.physics.add.overlap(this.bulletGroup, this.enemies, this.killEnemy, null, this)
 
         this.physics.world.bounds.width = 1800
         this.physics.world.bounds.height = 900
-
-        // this.cameras.main.setSize(1440,900) //canvas
         this.cameras.main.setBounds(0,0,1800,900) //game
         this.cameras.main.startFollow(this.player)
 
@@ -179,11 +171,8 @@ export class GameScene extends Phaser.Scene {
         
         
         // TO DO check if we have all the stars, then go to the end scene
-        // this.scoreField.text = this.registry.values.scraps+ ' SCRAPS COLLECTED'
-        
         if(this.registry.values.scraps == 12){
             this.scene.start('GameScene2')
-        //    this.registry.values.scraps = 0
         }
     }
     update(){

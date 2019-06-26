@@ -24,7 +24,6 @@ export class GameScene3 extends Phaser.Scene {
     private timer : Phaser.Time.TimerEvent
     private hitTimeout = false
  
-
     constructor() {
         super({ key: "GameScene3" })
      
@@ -70,8 +69,6 @@ export class GameScene3 extends Phaser.Scene {
         let music = this.scene.scene.sound.add('meow', config);
         music.play();
         
-        
-       
         // 11 SCRAPS
         this.scraps = this.physics.add.group({
             key: 'scrap',
@@ -85,15 +82,12 @@ export class GameScene3 extends Phaser.Scene {
         }
 
         // TODO add player and enemy
-        
         this.player = new Player(this)
-
 
         this.platform = this.add.group({ runChildUpdate: true})
         this.hills = this.add.group({ runChildUpdate: true })
 
         //PLATFORM  
-        // const platform : Platform = (this.platform.children.entries[0]) as Platform
         this.physics.add.collider(this.player, this.platform)
         this.platform.add(new Platform(this, 1200, 800, 'FLAT3'), true)
         this.platform.add(new Platform(this, 100, 800, 'MEDIUM2'), true)
@@ -108,13 +102,11 @@ export class GameScene3 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.scraps, this.collectScraps, null, this)
         this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this)
 
-
         this.physics.add.overlap(this.bulletGroup, this.enemies, this.killEnemy, null, this)
 
         this.physics.world.bounds.width = 1800
         this.physics.world.bounds.height = 900
 
-        // this.cameras.main.setSize(1440,900) //canvas
         this.cameras.main.setBounds(0,0,1800,900) //game
         this.cameras.main.startFollow(this.player)
 
@@ -154,16 +146,12 @@ export class GameScene3 extends Phaser.Scene {
     }
 
     private killEnemy(bullet: Bullet, enemy : enemy) {
-        console.log("enemy geraakt!")
-        console.log(bullet)
-        console.log(enemy)
         this.enemies.remove(enemy, true, true)
     }
 
 
     private collectScraps(player : Player , scraps) : void {
         this.scraps.remove(scraps, true, true)
-        // this.registry.values.score++
         this.registry.values.scraps++
 
         let config = {
@@ -177,20 +165,13 @@ export class GameScene3 extends Phaser.Scene {
         }
         let bell = this.scene.scene.sound.add('bell', config);
         bell.play();
-        
-        
+             
         // TO DO check if we have all the stars, then go to the end scene
-        // this.scoreField.text = this.registry.values.scraps+ ' SCRAPS COLLECTED'
-        
         if(this.registry.values.scraps == 42){
             this.scene.start('GameScene2')
-        //    this.registry.values.scraps = 0
         }
     }
     update(){
         this.player.update()
-        // this.bgtile.tilePositionX += 1
-
     }
-
 }

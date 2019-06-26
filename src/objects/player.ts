@@ -10,11 +10,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private arcade : Arcade
     private facing:number = 1
 
-    
     public get direction() : number {
         return this.facing
     }
-    
 
     constructor(scene) {
         super(scene, 0, 500, "NEKO_IDLE1")
@@ -31,14 +29,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.createAnimations()
         this.play("IDLE", true)
 
-        console.log("creating player")
-
-
         let g = this.scene.game as Neko
         this.arcade = g.arcade
-
-        console.log("init joysticks")
-        console.log(this.arcade)
 
         document.addEventListener("joystick0button0", () => this.handleFireButton())
     }
@@ -48,7 +40,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     private joystickInput():void {
-        // console.log("reading joystick")
         for (let joystick of this.arcade.Joysticks) {
             joystick.update()
         }
@@ -110,8 +101,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             console.log("Fire")
         }
        
-        
-
         //ANIMATIES
         if (!this.body.touching.down) {
             this.play("JUMP", true)

@@ -50,9 +50,6 @@ export class StartScene extends Phaser.Scene {
 
         this.collectibleListener = () => this.showCollectibles()
         document.addEventListener("joystick0button1", this.collectibleListener)
-
-        console.log("number of joysticks")
-        console.log(this.arcade.Joysticks)
     }
 
     private nextGame(){
